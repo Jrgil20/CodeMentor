@@ -7,7 +7,8 @@ import {
   ShieldCheck, 
   Send, 
   CheckCircle2,
-  ChevronRight
+  ChevronRight,
+  MessageSquare
 } from 'lucide-react';
 import { UCAB_SUBJECTS, TUTORING_PLANS, TUTORING_LIMITS, CONTACT_CONFIG, getWhatsappUrl } from '../data/tutoring';
 import { testimonials } from '../data/testimonials';
@@ -248,37 +249,57 @@ const UcabLandingPage: React.FC = () => {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
-            {testimonials.map((test) => (
-              <div
-                key={test.id}
-                className="bg-gray-50 dark:bg-gray-800 p-6 rounded-2xl border border-gray-200 dark:border-gray-700 flex flex-col justify-between"
+          {testimonials.length === 0 ? (
+            <div className="max-w-2xl mx-auto text-center p-8 bg-gray-50 dark:bg-gray-800 rounded-2xl border border-dashed border-gray-300 dark:border-gray-700">
+              <MessageSquare className="mx-auto text-blue-500 mb-3" size={32} />
+              <h3 className="text-base font-bold text-gray-900 dark:text-white mb-2">
+                Aún no hay reseñas publicadas
+              </h3>
+              <p className="text-xs text-gray-600 dark:text-gray-400 max-w-md mx-auto mb-5">
+                Transparencia ante todo: cero reseñas ficticias. Si preparaste un parcial o viste clases conmigo, podés ser el primero en compartir tu experiencia honesta.
+              </p>
+              <a
+                href={getWhatsappUrl("Hola Jesús, cursé contigo en la UCAB y me gustaría dejar una reseña para tu web.")}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 text-xs font-semibold text-blue-600 dark:text-blue-400 hover:underline"
               >
-                <div>
-                  <div className="flex items-center justify-between gap-2 mb-3">
-                    <span className="inline-flex items-center gap-1 text-[11px] font-semibold text-emerald-700 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/40 px-2 py-0.5 rounded-full border border-emerald-200 dark:border-emerald-800">
-                      <CheckCircle2 size={12} />
-                      Alumno Verificado
-                    </span>
-                    <span className="text-[11px] text-gray-400">{test.period}</span>
-                  </div>
-                  <p className="text-xs md:text-sm text-gray-700 dark:text-gray-300 italic mb-4 leading-relaxed">
-                    "{test.content}"
-                  </p>
-                </div>
-
-                <div className="flex items-center justify-between border-t border-gray-200 dark:border-gray-700 pt-3">
+                Enviar testimonio por WhatsApp →
+              </a>
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+              {testimonials.map((test) => (
+                <div
+                  key={test.id}
+                  className="bg-gray-50 dark:bg-gray-800 p-6 rounded-2xl border border-gray-200 dark:border-gray-700 flex flex-col justify-between"
+                >
                   <div>
-                    <h4 className="text-xs font-bold text-gray-900 dark:text-white">{test.name}</h4>
-                    <p className="text-[11px] text-blue-600 dark:text-blue-400">{test.subject}</p>
+                    <div className="flex items-center justify-between gap-2 mb-3">
+                      <span className="inline-flex items-center gap-1 text-[11px] font-semibold text-emerald-700 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/40 px-2 py-0.5 rounded-full border border-emerald-200 dark:border-emerald-800">
+                        <CheckCircle2 size={12} />
+                        Alumno Verificado
+                      </span>
+                      <span className="text-[11px] text-gray-400">{test.period}</span>
+                    </div>
+                    <p className="text-xs md:text-sm text-gray-700 dark:text-gray-300 italic mb-4 leading-relaxed">
+                      "{test.content}"
+                    </p>
                   </div>
-                  <div className="text-amber-400 text-xs">
-                    {'★'.repeat(test.rating || 5)}
+
+                  <div className="flex items-center justify-between border-t border-gray-200 dark:border-gray-700 pt-3">
+                    <div>
+                      <h4 className="text-xs font-bold text-gray-900 dark:text-white">{test.name}</h4>
+                      <p className="text-[11px] text-blue-600 dark:text-blue-400">{test.subject}</p>
+                    </div>
+                    <div className="text-amber-400 text-xs">
+                      {'★'.repeat(test.rating || 5)}
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))}
-          </div>
+              ))}
+            </div>
+          )}
         </div>
       </section>
 
