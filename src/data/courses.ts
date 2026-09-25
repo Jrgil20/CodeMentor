@@ -3,47 +3,56 @@ import { Course } from '../types';
 export const courses: Course[] = [
   {
     id: 1,
-    title: "Fundamentos de Programación",
-    description: "Curso introductorio para personas sin experiencia previa. Aprende las bases de la lógica de programación, algoritmos y estructuras de datos fundamentales.",
-    duration: "8 semanas",
+    title: "Bases para Vibe Coders",
+    description: "Aprendé a construir aplicaciones reales asistido por IA pero con criterio técnico: entendé qué genera el modelo, cómo depurar errores, versionar con Git y estructurar componentes sin programar a ciegas.",
+    duration: "10 horas (5 sesiones de 2h)",
     level: "beginner",
-    price: 299,
+    price: 50,
+    hourlyRate: "$5 / hora",
+    badge: "Tendencia",
     features: [
-      "12 sesiones de 2 horas",
-      "Proyectos prácticos semanales",
-      "Mentoría personalizada",
-      "Certificado de finalización"
+      "De la idea al prototipo funcional con IA",
+      "Control de versiones y Git sin miedo",
+      "Lectura y auditoría del código autogenerado",
+      "Resolución de bugs y debugging sistemático",
+      "Despliegue estático a producción con $0 costo"
     ],
-    image: "https://images.pexels.com/photos/1181263/pexels-photo-1181263.jpeg?auto=compress&cs=tinysrgb&w=600"
+    image: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=600&q=80"
   },
   {
     id: 2,
-    title: "Desarrollo Web Full Stack",
-    description: "Domina el desarrollo web completo, desde el frontend con React hasta el backend con Node.js, incluyendo bases de datos y despliegue.",
-    duration: "12 semanas",
+    title: "Bases para el Desarrollo de Software",
+    description: "Cimientos de ingeniería esenciales: pensamiento algorítmico, lógica de programación, tipos de datos, estructuras fundamentales y principios de diseño limpio para no depender de trucos.",
+    duration: "16 horas (8 sesiones de 2h)",
     level: "intermediate",
-    price: 499,
+    price: 80,
+    hourlyRate: "$5 / hora",
+    badge: "Esencial",
     features: [
-      "24 sesiones de 2 horas",
-      "5 proyectos completos para tu portafolio",
-      "Sesiones de código en vivo",
-      "Preparación para entrevistas técnicas"
+      "Lógica formal y estructuras de control",
+      "Estructuras de datos elementales y su costo",
+      "Modularización y funciones puras",
+      "Buenas prácticas y Clean Code",
+      "Ejercicios prácticos paso a paso"
     ],
-    image: "https://images.pexels.com/photos/546819/pexels-photo-546819.jpeg?auto=compress&cs=tinysrgb&w=600"
+    image: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=600&q=80"
   },
   {
     id: 3,
-    title: "Algoritmos Avanzados y Preparación para Entrevistas",
-    description: "Curso intensivo enfocado en algoritmos complejos, estructuras de datos avanzadas y resolución de problemas para entrevistas técnicas.",
-    duration: "6 semanas",
+    title: "Bases para el Uso de la IA",
+    description: "Dominá las herramientas de inteligencia artificial aplicada al desarrollo: prompting de alta precisión, gestión de contexto, agentes autónomos, frameworks modernos y flujos de trabajo profesionales.",
+    duration: "12 horas (6 sesiones de 2h)",
     level: "advanced",
-    price: 399,
+    price: 60,
+    hourlyRate: "$5 / hora",
+    badge: "Productividad",
     features: [
-      "12 sesiones de 2 horas",
-      "100+ ejercicios de programación",
-      "Simulaciones de entrevistas",
-      "Estrategias para resolución de problemas"
+      "Técnicas avanzadas de prompting técnico",
+      "Modelos de lenguaje, tokens y ventanas de contexto",
+      "Flujos de trabajo con agentes y CLI (Antigravity/Cursor)",
+      "Automatización de tareas repetitivas de código",
+      "Límites, alucinaciones y cómo mitigarlas"
     ],
-    image: "https://images.pexels.com/photos/1181290/pexels-photo-1181290.jpeg?auto=compress&cs=tinysrgb&w=600"
+    image: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=600&q=80"
   }
 ];

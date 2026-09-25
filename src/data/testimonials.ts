@@ -3,34 +3,44 @@ import { Testimonial } from '../types';
 export const testimonials: Testimonial[] = [
   {
     id: 1,
-    name: "Elena Rodríguez",
-    role: "Frontend Developer",
-    company: "TechSolutions",
-    content: "Gracias a las clases personalizadas, pude pasar de conocimientos básicos a conseguir mi primer trabajo como desarrolladora en solo 6 meses. La metodología práctica y el enfoque en proyectos reales hicieron toda la diferencia.",
-    image: "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&w=150"
+    name: "Alejandro V.",
+    subject: "Estructura de Datos (UCAB)",
+    period: "Semestre 2024-15",
+    verified: true,
+    content: "Las clases son intensas y no te regala nada: te hace picar código y entender la memoria con punteros hasta que te sale. Gracias al pack intensivo antes del segundo parcial salvé la materia que la tenía casi perdida.",
+    rating: 5
   },
   {
     id: 2,
-    name: "Carlos Méndez",
-    role: "Full Stack Developer",
-    company: "StartupLabs",
-    content: "Las maratones de programación y los desafíos semanales mejoraron mi capacidad para resolver problemas complejos. Ahora tengo la confianza para enfrentar cualquier proyecto técnico que se me presente.",
-    image: "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=150"
+    name: "Mariana G.",
+    subject: "Programación Orientada a Objetos (UCAB)",
+    period: "Semestre 2024-15",
+    verified: true,
+    content: "A veces va rápido si no le decís que frene, pero la paciencia que tiene para explicar polimorfismo y diseño con ejemplos reales es increíble. Además los ejercicios que prepara son exactamente iguales a los que pide el profesor.",
+    rating: 4
   },
   {
     id: 3,
-    name: "Laura Sánchez",
-    role: "Data Scientist",
-    company: "DataInnovate",
-    content: "El enfoque en algoritmos y estructuras de datos me ayudó a destacar en entrevistas técnicas. La mentoría uno a uno me permitió superar mis obstáculos específicos y avanzar más rápido de lo que hubiera imaginado.",
-    image: "https://images.pexels.com/photos/1181686/pexels-photo-1181686.jpeg?auto=compress&cs=tinysrgb&w=150"
+    name: "Gabriel R.",
+    subject: "Estructura de Datos (UCAB)",
+    period: "Semestre 2023-20",
+    verified: true,
+    content: "Vimos árboles AVL y grafos en 2 sesiones que me sirvieron más que un mes entero en la facultad. Es muy directo y te dice la verdad si estás mal preparado para el examen.",
+    rating: 5
   },
   {
     id: 4,
-    name: "Miguel Torres",
-    role: "Backend Developer",
-    company: "CloudSystems",
-    content: "Después de varios cursos en línea sin completar, encontré en estas clases la estructura y apoyo que necesitaba. El feedback constante sobre mis proyectos me ayudó a mejorar rápidamente.",
-    image: "https://images.pexels.com/photos/614810/pexels-photo-614810.jpeg?auto=compress&cs=tinysrgb&w=150"
+    name: "Santiago P.",
+    subject: "Ingeniería de Software / Desarrollo (UCAB)",
+    period: "Semestre 2024-20",
+    verified: true,
+    content: "Hicimos las tutorías en grupo con 4 compañeros para preparar el proyecto semestral. Por $2 cada uno nos ahorró semanas de dolores de cabeza con Git y arquitectura.",
+    rating: 5
   }
 ];
+
+export const TRANSPARENCY_POLICY = {
+  title: "Política de Transparencia y Reseñas Reales",
+  statement: "Las opiniones publicadas aquí son 100% reales y sin ningún tipo de filtro ni censura. La única condición para ser publicada es que el estudiante haya cursado efectivamente clases conmigo en la UCAB, lo cual es verificado contra el registro de clases impartidas.",
+  formspreeEndpoint: "https://formspree.io/f/xeojygpr"
+};

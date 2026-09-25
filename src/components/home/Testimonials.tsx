@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { ChevronLeft, ChevronRight, Quote } from 'lucide-react';
-import { testimonials } from '../../data/testimonials';
+import { ChevronLeft, ChevronRight, Quote, CheckCircle2, ShieldCheck, Send, MessageSquare } from 'lucide-react';
+import { testimonials, TRANSPARENCY_POLICY } from '../../data/testimonials';
 
 const Testimonials: React.FC = () => {
   const [activeIndex, setActiveIndex] = useState(0);
+  const [showReviewForm, setShowReviewForm] = useState(false);
+  const [formSubmitted, setFormSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const nextTestimonial = () => {
     setActiveIndex((prevIndex) => (prevIndex + 1) % testimonials.length);
@@ -14,86 +17,118 @@ const Testimonials: React.FC = () => {
     setActiveIndex((prevIndex) => (prevIndex - 1 + testimonials.length) % testimonials.length);
   };
 
-  const testimonialVariants = {
-    hidden: { opacity: 0, x: 50 },
-    visible: { 
-      opacity: 1, 
-      x: 0,
-      transition: { 
-        duration: 0.6,
-        ease: 'easeOut'
+  const handleReviewSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    const form = e.currentTarget;
+    const formData = new FormData(form);
+
+    try {
+      const res = await fetch(TRANSPARENCY_POLICY.formspreeEndpoint, {
+        method: 'POST',
+        body: formData,
+        headers: { Accept: 'application/json' },
+      });
+      if (res.ok) {
+        setFormSubmitted(true);
       }
-    },
-    exit: { 
-      opacity: 0, 
-      x: -50,
-      transition: { 
-        duration: 0.4,
-        ease: 'easeIn'
-      }
+    } catch {
+      alert('Error de conexión. Podés enviarme tu reseña por WhatsApp.');
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
+  const testimonialVariants = {
+    hidden: { opacity: 0, x: 30 },
+    visible: { 
+      opacity: 1, 
+      x: 0,
+      transition: { duration: 0.5, ease: 'easeOut' }
+    },
+    exit: { 
+      opacity: 0, 
+      x: -30,
+      transition: { duration: 0.3, ease: 'easeIn' }
+    }
+  };
+
+  const active = testimonials[activeIndex];
+
   return (
-    <div className="py-16 md:py-24 bg-gray-50 dark:bg-gray-800">
+    <div className="py-16 md:py-24 bg-gray-50 dark:bg-gray-800/80 border-t border-gray-200 dark:border-gray-800">
       <div className="container mx-auto px-4 md:px-6">
-        <div className="text-center mb-12">
+        
+        {/* Encabezado */}
+        <div className="text-center mb-10">
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-100 text-emerald-800 dark:bg-emerald-900/40 dark:text-emerald-300 mb-3">
+            <ShieldCheck size={14} />
+            Transparencia Radical
+          </div>
           <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gray-900 dark:text-white">
-            Lo que dicen mis estudiantes
+            Opiniones Reales de Estudiantes UCAB
           </h2>
-          <p className="text-lg text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
-            Historias reales de personas que transformaron su carrera con mentorías personalizadas
+          <p className="text-sm md:text-base text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+            {TRANSPARENCY_POLICY.statement}
           </p>
         </div>
 
-        <div className="max-w-4xl mx-auto">
-          <div className="relative bg-white dark:bg-gray-900 rounded-xl shadow-lg p-6 md:p-8">
+        {/* Carrusel de Testimonios */}
+        <div className="max-w-4xl mx-auto mb-10">
+          <div className="relative bg-white dark:bg-gray-900 rounded-2xl shadow-lg p-6 md:p-10 border border-gray-200 dark:border-gray-700">
             <Quote
               size={48}
-              className="text-blue-100 dark:text-blue-900/30 absolute top-6 left-6"
+              className="text-blue-100 dark:text-blue-900/30 absolute top-6 left-6 -z-0"
             />
             
-            <div className="relative">
+            <div className="relative z-10">
               <motion.div
                 key={activeIndex}
                 initial="hidden"
                 animate="visible"
                 exit="exit"
                 variants={testimonialVariants}
-                className="flex flex-col md:flex-row items-center md:items-start gap-6"
               >
-                <div className="flex-shrink-0">
-                  <img
-                    src={testimonials[activeIndex].image}
-                    alt={testimonials[activeIndex].name}
-                    className="w-20 h-20 rounded-full object-cover border-2 border-blue-200 dark:border-blue-800"
-                  />
+                <div className="flex items-center gap-2 mb-4">
+                  <span className="inline-flex items-center gap-1 text-xs font-semibold text-emerald-700 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/60 px-2.5 py-0.5 rounded-full border border-emerald-200 dark:border-emerald-800">
+                    <CheckCircle2 size={13} />
+                    Alumno Verificado UCAB
+                  </span>
+                  <span className="text-xs text-gray-500 dark:text-gray-400">
+                    {active.period}
+                  </span>
                 </div>
+
+                <p className="text-gray-800 dark:text-gray-200 text-base md:text-lg italic mb-6 leading-relaxed">
+                  "{active.content}"
+                </p>
                 
-                <div>
-                  <p className="text-gray-700 dark:text-gray-300 text-lg italic mb-6 z-10 relative">
-                    "{testimonials[activeIndex].content}"
-                  </p>
-                  
+                <div className="flex items-center justify-between border-t border-gray-100 dark:border-gray-800 pt-4">
                   <div>
-                    <h4 className="font-semibold text-gray-900 dark:text-white text-lg">
-                      {testimonials[activeIndex].name}
+                    <h4 className="font-bold text-gray-900 dark:text-white text-base">
+                      {active.name}
                     </h4>
-                    <p className="text-gray-600 dark:text-gray-400">
-                      {testimonials[activeIndex].role}, {testimonials[activeIndex].company}
+                    <p className="text-xs text-blue-600 dark:text-blue-400 font-medium">
+                      Materia: {active.subject}
                     </p>
+                  </div>
+                  <div className="flex text-amber-400 text-sm">
+                    {Array.from({ length: active.rating || 5 }).map((_, i) => (
+                      <span key={i}>★</span>
+                    ))}
                   </div>
                 </div>
               </motion.div>
             </div>
             
-            <div className="flex justify-between mt-8">
+            {/* Controles */}
+            <div className="flex justify-between items-center mt-8 pt-4 border-t border-gray-100 dark:border-gray-800">
               <button
                 onClick={prevTestimonial}
                 className="p-2 rounded-full bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
-                aria-label="Previous testimonial"
+                aria-label="Testimonio anterior"
               >
-                <ChevronLeft size={24} className="text-gray-700 dark:text-gray-300" />
+                <ChevronLeft size={20} className="text-gray-700 dark:text-gray-300" />
               </button>
               
               <div className="flex space-x-2">
@@ -101,12 +136,12 @@ const Testimonials: React.FC = () => {
                   <button
                     key={index}
                     onClick={() => setActiveIndex(index)}
-                    className={`w-2.5 h-2.5 rounded-full ${
+                    className={`w-2.5 h-2.5 rounded-full transition-all ${
                       index === activeIndex
-                        ? 'bg-blue-600 dark:bg-blue-500'
+                        ? 'bg-blue-600 dark:bg-blue-500 w-6'
                         : 'bg-gray-300 dark:bg-gray-700'
                     }`}
-                    aria-label={`Go to testimonial ${index + 1}`}
+                    aria-label={`Ir al testimonio ${index + 1}`}
                   />
                 ))}
               </div>
@@ -114,13 +149,81 @@ const Testimonials: React.FC = () => {
               <button
                 onClick={nextTestimonial}
                 className="p-2 rounded-full bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
-                aria-label="Next testimonial"
+                aria-label="Siguiente testimonio"
               >
-                <ChevronRight size={24} className="text-gray-700 dark:text-gray-300" />
+                <ChevronRight size={20} className="text-gray-700 dark:text-gray-300" />
               </button>
             </div>
           </div>
         </div>
+
+        {/* Llamado a Ex-Alumnos */}
+        <div className="max-w-2xl mx-auto text-center">
+          {!showReviewForm ? (
+            <button
+              onClick={() => setShowReviewForm(true)}
+              className="inline-flex items-center gap-2 text-xs md:text-sm font-semibold text-blue-600 dark:text-blue-400 hover:underline bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 px-4 py-2.5 rounded-xl shadow-sm"
+            >
+              <MessageSquare size={16} />
+              ¿Viste clases o tutorías conmigo? Dejá tu reseña honesta acá
+            </button>
+          ) : (
+            <div className="bg-white dark:bg-gray-900 rounded-xl p-6 border border-gray-200 dark:border-gray-700 text-left shadow-md">
+              <h3 className="text-base font-bold text-gray-900 dark:text-white mb-2">
+                Dejá tu opinión sincera (se verificará que hayas cursado)
+              </h3>
+              <p className="text-xs text-gray-600 dark:text-gray-400 mb-4">
+                Tu comentario se publicará tal cual lo envíes. Solo comprobamos que hayas visto clases en la UCAB o de forma particular.
+              </p>
+
+              {formSubmitted ? (
+                <div className="p-4 bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-300 rounded-lg text-emerald-800 dark:text-emerald-300 text-xs">
+                  ✓ ¡Gracias por tu reseña! Apenas verifiquemos tu período de clases se publicará directamente en la página.
+                </div>
+              ) : (
+                <form onSubmit={handleReviewSubmit} className="space-y-3">
+                  <input type="hidden" name="_subject" value="Nueva reseña de estudiante para CodeMentor" />
+                  <div>
+                    <label className="block text-xs font-medium text-gray-700 dark:text-gray-300 mb-1">Tu nombre o iniciales</label>
+                    <input type="text" name="name" required placeholder="Ej: Juan D." className="w-full text-xs px-3 py-2 border rounded-md dark:bg-gray-800 dark:border-gray-700 dark:text-white" />
+                  </div>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div>
+                      <label className="block text-xs font-medium text-gray-700 dark:text-gray-300 mb-1">Materia cursada</label>
+                      <input type="text" name="subject" required placeholder="Ej: Estructura de Datos" className="w-full text-xs px-3 py-2 border rounded-md dark:bg-gray-800 dark:border-gray-700 dark:text-white" />
+                    </div>
+                    <div>
+                      <label className="block text-xs font-medium text-gray-700 dark:text-gray-300 mb-1">Período o semestre</label>
+                      <input type="text" name="period" required placeholder="Ej: Semestre 2024-15" className="w-full text-xs px-3 py-2 border rounded-md dark:bg-gray-800 dark:border-gray-700 dark:text-white" />
+                    </div>
+                  </div>
+                  <div>
+                    <label className="block text-xs font-medium text-gray-700 dark:text-gray-300 mb-1">Tu reseña (lo bueno y lo que se puede mejorar)</label>
+                    <textarea name="message" required rows={3} placeholder="Contá tu experiencia real con las clases..." className="w-full text-xs px-3 py-2 border rounded-md dark:bg-gray-800 dark:border-gray-700 dark:text-white"></textarea>
+                  </div>
+                  <div className="flex gap-2">
+                    <button
+                      type="submit"
+                      disabled={isSubmitting}
+                      className="inline-flex items-center gap-1.5 bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold px-4 py-2 rounded-lg transition-colors disabled:opacity-50"
+                    >
+                      <Send size={14} />
+                      {isSubmitting ? 'Enviando...' : 'Enviar reseña'}
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setShowReviewForm(false)}
+                      className="text-xs text-gray-500 hover:underline px-3 py-2"
+                    >
+                      Cancelar
+                    </button>
+                  </div>
+                </form>
+              )}
+            </div>
+          )}
+        </div>
+
       </div>
     </div>
   );

@@ -15,12 +15,33 @@ type FormData = {
 
 const ContactPage: React.FC = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
   const { register, handleSubmit, formState: { errors } } = useForm<FormData>();
 
-  const onSubmit = (data: FormData) => {
-    console.log(data);
-    // Here you would typically send the form data to a server
-    setIsSubmitted(true);
+  const onSubmit = async (data: FormData) => {
+    setIsSubmitting(true);
+    setErrorMessage('');
+    try {
+      const response = await fetch('https://formspree.io/f/xeojygpr', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
+
+      if (response.ok) {
+        setIsSubmitted(true);
+      } else {
+        setErrorMessage('Hubo un problema al enviar. Por favor escribime por WhatsApp.');
+      }
+    } catch {
+      setErrorMessage('Error de red. Podés contactarme directamente por WhatsApp.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const containerVariants = {
@@ -259,13 +280,17 @@ const ContactPage: React.FC = () => {
                       </div>
                       
                       <div>
+                        {errorMessage && (
+                          <p className="mb-3 text-xs text-red-500">{errorMessage}</p>
+                        )}
                         <Button 
                           type="submit" 
                           variant="primary"
                           className="w-full md:w-auto"
+                          disabled={isSubmitting}
                         >
                           <Send size={18} className="mr-2" />
-                          Enviar mensaje
+                          {isSubmitting ? 'Enviando mensaje...' : 'Enviar mensaje'}
                         </Button>
                       </div>
                     </form>

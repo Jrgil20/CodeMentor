@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
-import { Link } from 'react-router-dom';
 import { Video, FileText, BookOpen, PenTool as Tool, Search } from 'lucide-react';
 import { resources } from '../data/resources';
 import Section from '../components/common/Section';

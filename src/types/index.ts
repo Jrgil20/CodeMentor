@@ -1,10 +1,14 @@
 export interface Testimonial {
   id: number;
   name: string;
-  role: string;
-  company: string;
+  role?: string;
+  company?: string;
+  subject: string;
+  period: string;
+  verified: boolean;
   content: string;
-  image: string;
+  image?: string;
+  rating?: number;
 }
 
 export interface Project {
@@ -45,8 +49,33 @@ export interface Course {
   duration: string;
   level: 'beginner' | 'intermediate' | 'advanced';
   price: number;
+  hourlyRate: string;
   features: string[];
   image: string;
+  badge?: string;
+}
+
+export interface TutoringPlan {
+  id: string;
+  title: string;
+  subtitle: string;
+  price: number;
+  priceSuffix: string;
+  rateDetail: string;
+  description: string;
+  features: string[];
+  popular?: boolean;
+  minPersons?: number;
+  badge?: string;
+}
+
+export interface Subject {
+  id: string;
+  name: string;
+  code?: string;
+  isMain?: boolean;
+  description: string;
+  topics: string[];
 }
 
 export interface Question {

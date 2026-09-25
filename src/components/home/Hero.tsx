@@ -1,7 +1,8 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { CheckCircle } from 'lucide-react';
+import { CheckCircle, AlertCircle } from 'lucide-react';
 import Button from '../common/Button';
+import { TUTORING_LIMITS } from '../../data/tutoring';
 
 const Hero: React.FC = () => {
   const containerVariants = {
@@ -9,7 +10,7 @@ const Hero: React.FC = () => {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.2,
+        staggerChildren: 0.15,
       },
     },
   };
@@ -27,10 +28,10 @@ const Hero: React.FC = () => {
   };
 
   const highlights = [
-    'Metodología probada con +100 estudiantes',
-    'Enfoque práctico con proyectos reales',
-    'Mentoría 1-a-1 personalizada',
-    'Comunidad activa de estudiantes',
+    'Enfoque prioritario en Estructura de Datos (UCAB)',
+    'Tarifas desde $5/h con packs semanales y grupales ($2/h)',
+    'Metodología orientada a parciales y proyectos reales',
+    'Cursos modernos: Vibe Coding y desarrollo asistido por IA',
   ];
 
   return (
@@ -43,19 +44,24 @@ const Hero: React.FC = () => {
             animate="visible"
             variants={containerVariants}
           >
+            {/* Badge de Cupos */}
+            <motion.div variants={itemVariants} className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-semibold bg-amber-100 text-amber-900 dark:bg-amber-900/40 dark:text-amber-300 border border-amber-300 dark:border-amber-700 mb-6">
+              <AlertCircle size={14} className="text-amber-600 dark:text-amber-400" />
+              <span>Cupos limitados: solo {TUTORING_LIMITS.availableSpots} lugares disponibles para seguimiento 1 a 1</span>
+            </motion.div>
+
             <motion.h1 
-              className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 dark:text-white mb-6"
+              className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 dark:text-white mb-6 leading-tight"
               variants={itemVariants}
             >
-              Aprende a programar con un <span className="text-blue-600 dark:text-blue-400">mentor experto</span>
+              Tutorías <span className="text-blue-600 dark:text-blue-400">UCAB</span> y Formación en Software con <span className="text-indigo-600 dark:text-indigo-400">IA</span>
             </motion.h1>
             
             <motion.p 
-              className="text-lg md:text-xl text-gray-600 dark:text-gray-300 mb-8 max-w-2xl"
+              className="text-lg md:text-xl text-gray-600 dark:text-gray-300 mb-8 max-w-2xl leading-relaxed"
               variants={itemVariants}
             >
-              Transforma tu futuro con clases personalizadas enfocadas en proyectos reales. 
-              Metodología práctica para dominar algoritmos, estructuras de datos y desarrollo web moderno.
+              Mentoría personalizada para estudiantes de ingeniería: dominá <strong>Estructura de Datos</strong>, POO y Desarrollo de Software. Aprendé con criterio técnico y sin atajos vacíos.
             </motion.p>
             
             <motion.ul 
@@ -65,10 +71,10 @@ const Hero: React.FC = () => {
               {highlights.map((item, index) => (
                 <motion.li 
                   key={index}
-                  className="flex items-center text-gray-700 dark:text-gray-300"
+                  className="flex items-center text-gray-700 dark:text-gray-300 text-sm md:text-base"
                   variants={itemVariants}
                 >
-                  <CheckCircle size={20} className="text-green-500 mr-2 flex-shrink-0" />
+                  <CheckCircle size={18} className="text-green-500 mr-2.5 flex-shrink-0" />
                   <span>{item}</span>
                 </motion.li>
               ))}
@@ -79,10 +85,10 @@ const Hero: React.FC = () => {
               variants={itemVariants}
             >
               <Button to="/contacto" size="lg" variant="primary">
-                Agendar primera clase
+                Consultar disponibilidad
               </Button>
               <Button to="/auto-evaluacion" size="lg" variant="outline">
-                ¿Es para mí? Evaluación
+                Diagnóstico de nivel
               </Button>
             </motion.div>
           </motion.div>
@@ -93,11 +99,18 @@ const Hero: React.FC = () => {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
           >
-            <img 
-              src="https://images.pexels.com/photos/3861958/pexels-photo-3861958.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" 
-              alt="Profesor de programación enseñando" 
-              className="rounded-xl shadow-2xl w-full h-auto object-cover"
-            />
+            <div className="relative">
+              <img 
+                src="https://images.pexels.com/photos/3861958/pexels-photo-3861958.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" 
+                alt="Profesor de programación enseñando" 
+                className="rounded-2xl shadow-2xl w-full h-auto object-cover border border-white/20 dark:border-gray-700"
+              />
+              <div className="absolute -bottom-5 -left-5 bg-white dark:bg-gray-800 p-4 rounded-xl shadow-lg border border-gray-100 dark:border-gray-700 hidden sm:block">
+                <p className="text-xs font-semibold text-gray-500 dark:text-gray-400">Tarifa estudiante UCAB</p>
+                <p className="text-2xl font-black text-blue-600 dark:text-blue-400">Desde $5/h</p>
+                <p className="text-[11px] text-gray-500">en packs semanales</p>
+              </div>
+            </div>
           </motion.div>
         </div>
       </div>
