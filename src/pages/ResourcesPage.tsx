@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
-import { BookOpen, PenTool as Tool, Search, Code, Shield, Cpu, Terminal, ExternalLink } from 'lucide-react';
+import { Search, ExternalLink } from 'lucide-react';
 import { resources } from '../data/resources';
 import Section from '../components/common/Section';
 import { ResourceTag } from '../types';

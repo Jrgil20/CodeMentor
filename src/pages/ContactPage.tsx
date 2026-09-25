@@ -5,6 +5,7 @@ import { Mail, MessageSquare, Phone, MapPin, Send, Calendar, Clock } from 'lucid
 import { useForm } from 'react-hook-form';
 import Section from '../components/common/Section';
 import Button from '../components/common/Button';
+import { CONTACT_CONFIG, getWhatsappUrl } from '../data/tutoring';
 
 type FormData = {
   name: string;
@@ -23,7 +24,7 @@ const ContactPage: React.FC = () => {
     setIsSubmitting(true);
     setErrorMessage('');
     try {
-      const response = await fetch('https://formspree.io/f/xeojygpr', {
+      const response = await fetch(CONTACT_CONFIG.formspreeEndpoint, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -98,8 +99,8 @@ const ContactPage: React.FC = () => {
                     <Mail className="w-5 h-5 text-blue-600 dark:text-blue-400 mt-0.5 mr-3 flex-shrink-0" />
                     <div>
                       <h4 className="font-medium text-gray-900 dark:text-white mb-1">Email</h4>
-                      <a href="mailto:info@codementor.com" className="text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
-                        info@codementor.com
+                      <a href={`mailto:${CONTACT_CONFIG.email}`} className="text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+                        {CONTACT_CONFIG.email}
                       </a>
                     </div>
                   </motion.div>
@@ -107,9 +108,9 @@ const ContactPage: React.FC = () => {
                   <motion.div variants={itemVariants} className="flex items-start mb-6">
                     <Phone className="w-5 h-5 text-blue-600 dark:text-blue-400 mt-0.5 mr-3 flex-shrink-0" />
                     <div>
-                      <h4 className="font-medium text-gray-900 dark:text-white mb-1">Teléfono</h4>
-                      <a href="tel:+5491155555555" className="text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
-                        +54 9 11 5555-5555
+                      <h4 className="font-medium text-gray-900 dark:text-white mb-1">WhatsApp / Teléfono</h4>
+                      <a href={getWhatsappUrl()} target="_blank" rel="noopener noreferrer" className="text-gray-600 dark:text-gray-300 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors font-medium">
+                        +58 424-8981415
                       </a>
                     </div>
                   </motion.div>
@@ -119,7 +120,7 @@ const ContactPage: React.FC = () => {
                     <div>
                       <h4 className="font-medium text-gray-900 dark:text-white mb-1">Ubicación</h4>
                       <p className="text-gray-600 dark:text-gray-300">
-                        Buenos Aires, Argentina (Clases remotas disponibles)
+                        Caracas, Venezuela • UCAB (Sesiones presenciales y online)
                       </p>
                     </div>
                   </motion.div>
@@ -155,12 +156,14 @@ const ContactPage: React.FC = () => {
                     
                     <motion.div variants={itemVariants}>
                       <Button 
-                        href="https://wa.me/5491155555555" 
+                        href={getWhatsappUrl()} 
+                        target="_blank"
+                        rel="noopener noreferrer"
                         variant="outline" 
-                        className="w-full justify-start"
+                        className="w-full justify-start text-emerald-600 dark:text-emerald-400 hover:text-emerald-700"
                       >
                         <MessageSquare size={18} className="mr-2" />
-                        Enviar WhatsApp
+                        Escribir por WhatsApp (+58 424-8981415)
                       </Button>
                     </motion.div>
                   </div>

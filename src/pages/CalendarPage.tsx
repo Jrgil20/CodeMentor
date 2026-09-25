@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 import { Clock, CheckCircle, BookOpen, Users, AlertCircle, MessageCircle, Send } from 'lucide-react';
 import Section from '../components/common/Section';
 import Button from '../components/common/Button';
-import { TUTORING_LIMITS, TUTORING_PLANS } from '../data/tutoring';
+import { TUTORING_LIMITS, TUTORING_PLANS, UCAB_SUBJECTS, CONTACT_CONFIG, getWhatsappUrl } from '../data/tutoring';
 
 const CalendarPage: React.FC = () => {
   const [selectedPlan, setSelectedPlan] = useState('two-hours');
@@ -18,7 +18,7 @@ const CalendarPage: React.FC = () => {
     const formData = new FormData(form);
 
     try {
-      const res = await fetch('https://formspree.io/f/xeojygpr', {
+      const res = await fetch(CONTACT_CONFIG.formspreeEndpoint, {
         method: 'POST',
         body: formData,
         headers: { Accept: 'application/json' },
@@ -59,7 +59,7 @@ const CalendarPage: React.FC = () => {
                 </p>
               </div>
               <a
-                href="https://wa.me/584120000000?text=Hola!%20Quisiera%20agendar%20una%20tutor%C3%ADa%20UCAB"
+                href={getWhatsappUrl('Hola! Quisiera agendar una tutoría UCAB')}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 whitespace-nowrap bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-semibold px-3.5 py-2 rounded-lg transition-colors"
@@ -193,10 +193,11 @@ const CalendarPage: React.FC = () => {
                             name="subject"
                             className="w-full text-xs px-3.5 py-2.5 border rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white focus:ring-2 focus:ring-blue-500 outline-none"
                           >
-                            <option value="Estructura de Datos">Estructura de Datos (UCAB)</option>
-                            <option value="Programación Orientada a Objetos">POO (UCAB)</option>
-                            <option value="Ingeniería de Software">Ingeniería de Software</option>
-                            <option value="Desarrollo de Software">Desarrollo de Software</option>
+                            {UCAB_SUBJECTS.map((sub) => (
+                              <option key={sub.id} value={sub.name}>
+                                {sub.name} {sub.isMain ? '(Prioritaria)' : ''}
+                              </option>
+                            ))}
                             <option value="Curso Vibe Coding">Curso: Bases Vibe Coders</option>
                             <option value="Curso Desarrollo">Curso: Bases Desarrollo</option>
                             <option value="Curso IA">Curso: Bases Uso de la IA</option>
@@ -241,7 +242,7 @@ const CalendarPage: React.FC = () => {
                         </button>
 
                         <a
-                          href="https://wa.me/584120000000?text=Hola!%20Quisiera%20agendar%20una%20clase%20directamente"
+                          href={getWhatsappUrl('Hola! Quisiera agendar una clase directamente')}
                           target="_blank"
                           rel="noopener noreferrer"
                           className="text-xs text-emerald-600 dark:text-emerald-400 font-semibold hover:underline inline-flex items-center gap-1"

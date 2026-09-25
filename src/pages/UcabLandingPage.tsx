@@ -9,8 +9,8 @@ import {
   CheckCircle2,
   ChevronRight
 } from 'lucide-react';
-import { UCAB_SUBJECTS, TUTORING_PLANS, TUTORING_LIMITS } from '../data/tutoring';
-import { testimonials, TRANSPARENCY_POLICY } from '../data/testimonials';
+import { UCAB_SUBJECTS, TUTORING_PLANS, TUTORING_LIMITS, CONTACT_CONFIG, getWhatsappUrl } from '../data/tutoring';
+import { testimonials } from '../data/testimonials';
 import Button from '../components/common/Button';
 
 const UcabLandingPage: React.FC = () => {
@@ -24,7 +24,7 @@ const UcabLandingPage: React.FC = () => {
     const formData = new FormData(form);
 
     try {
-      const res = await fetch(TRANSPARENCY_POLICY.formspreeEndpoint, {
+      const res = await fetch(CONTACT_CONFIG.formspreeEndpoint, {
         method: 'POST',
         body: formData,
         headers: { Accept: 'application/json' },
@@ -72,7 +72,7 @@ const UcabLandingPage: React.FC = () => {
 
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-10">
               <a
-                href="https://wa.me/584120000000?text=Hola!%20Soy%20estudiante%20de%20la%20UCAB%20y%20quiero%20consultar%20por%20las%20tutor%C3%ADas%20de%20Estructura%20de%20Datos"
+                href={getWhatsappUrl('Hola! Soy estudiante de la UCAB y quiero consultar por las tutorías de Estructura de Datos y Bases de Datos')}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white font-semibold text-sm px-6 py-3.5 rounded-xl transition-all shadow-md hover:shadow-lg"
@@ -215,7 +215,7 @@ const UcabLandingPage: React.FC = () => {
                 </div>
 
                 <a
-                  href={`https://wa.me/584120000000?text=Hola!%20Quiero%20reservar%20el%20plan%20de%20tutor%C3%ADa:%20${encodeURIComponent(plan.title)}`}
+                  href={getWhatsappUrl(`Hola! Quiero reservar el plan de tutoría: ${plan.title}`)}
                   target="_blank"
                   rel="noopener noreferrer"
                   className={`w-full py-2.5 text-xs font-semibold rounded-xl text-center transition-colors block ${
@@ -316,11 +316,12 @@ const UcabLandingPage: React.FC = () => {
                   <div>
                     <label className="block text-xs font-medium text-gray-700 dark:text-gray-300 mb-1">Materia</label>
                     <select name="subject" className="w-full text-xs px-3.5 py-2.5 border rounded-lg dark:bg-gray-800 dark:border-gray-700 dark:text-white">
-                      <option value="Estructura de Datos">Estructura de Datos</option>
-                      <option value="Programación Orientada a Objetos">Programación Orientada a Objetos</option>
-                      <option value="Ingeniería de Software">Ingeniería de Software</option>
-                      <option value="Desarrollo de Software">Desarrollo de Software</option>
-                      <option value="Otra materia">Otra materia</option>
+                      {UCAB_SUBJECTS.map((sub) => (
+                        <option key={sub.id} value={sub.name}>
+                          {sub.name} {sub.isMain ? '(Prioritaria)' : ''}
+                        </option>
+                      ))}
+                      <option value="Otra materia">Otra materia particular</option>
                     </select>
                   </div>
                   <div>
@@ -345,7 +346,7 @@ const UcabLandingPage: React.FC = () => {
                   </button>
 
                   <a
-                    href="https://wa.me/584120000000?text=Hola!%20Quisiera%20consultar%20directamente%20por%20las%20tutor%C3%ADas%20UCAB"
+                    href={getWhatsappUrl('Hola! Quisiera consultar directamente por las tutorías UCAB')}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-xs text-emerald-600 dark:text-emerald-400 font-semibold hover:underline inline-flex items-center gap-1"
