@@ -1,296 +1,328 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import { motion } from 'framer-motion';
-import { Briefcase, GraduationCap, Award, Users, Code, Book } from 'lucide-react';
+import { 
+  Trophy, 
+  GraduationCap, 
+  Award, 
+  Github, 
+  Linkedin, 
+  MessageCircle, 
+  CheckCircle2 
+} from 'lucide-react';
 import Section from '../components/common/Section';
 import Button from '../components/common/Button';
+import { CONTACT_CONFIG, getWhatsappUrl } from '../data/tutoring';
 
 const AboutPage: React.FC = () => {
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      transition: {
-        staggerChildren: 0.2,
-      },
+      transition: { staggerChildren: 0.15 },
     },
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
+    hidden: { opacity: 0, y: 15 },
     visible: {
       opacity: 1,
       y: 0,
-      transition: {
-        duration: 0.6,
-        ease: 'easeOut',
-      },
+      transition: { duration: 0.5, ease: 'easeOut' },
     },
   };
+
+  const achievements = [
+    {
+      title: "1.er Lugar — SolucionaLab Hackathon",
+      organization: "Mercantil Seguros (2025)",
+      description: "Co-desarrollo de un agente NLP inteligente para la detección de patrones críticos y validación de violaciones de SLA en feedback de usuarios."
+    },
+    {
+      title: "Programación Competitiva (ICPC)",
+      organization: "ICPC Super Regional Venezuela-Colombia",
+      description: "Clasificado al Super Regional internacional y 1.º y 5.º lugar en los maratones oficiales de programación competitiva de la UCAB."
+    },
+    {
+      title: "IBM Z Student Ambassador",
+      organization: "IBM (2025-2026)",
+      description: "Capacitador y embajador estudiantil en computación empresarial, COBOL y Python en entornos de mainframe z/OS."
+    },
+    {
+      title: "Lead Organizer — GitHub Copilot Dev Days",
+      organization: "GitHub Community (2026)",
+      description: "Coordinación técnica, diseño de actividades prácticas de ingeniería de software asistida por IA y evaluación de prompts."
+    },
+    {
+      title: "Arbitrum Excellence Scholarship",
+      organization: "Arbitrum Foundation (2024–2025)",
+      description: "Beca de excelencia otorgada por mérito académico y aportes al ecosistema Web3."
+    },
+    {
+      title: "Facilitador Universitario UCAB",
+      organization: "Universidad Católica Andrés Bello (2025)",
+      description: "Dictado del microcurso 'Seguridad en Redes': hardening de dispositivos y fundamentos de protección en infraestructura."
+    }
+  ];
+
+  const skillGroups = [
+    {
+      category: "Lenguajes",
+      skills: ["C", "C++", "Java", "Python", "JavaScript", "SQL", "COBOL (Básico)"]
+    },
+    {
+      category: "Backend & Bases de Datos",
+      skills: ["Node.js", "Express", "REST APIs", "JDBC", "MySQL", "Supabase", "Clean Architecture"]
+    },
+    {
+      category: "Fundamentos CS (Foco Tutorías)",
+      skills: ["Estructuras de Datos", "Algoritmos", "OOP", "TDD", "Memoria Dinámica", "Big O", "Async I/O"]
+    },
+    {
+      category: "AI & Web3",
+      skills: ["Azure AI Foundry", "Prompt Engineering", "Agentes NLP", "Solana", "Smart Contracts"]
+    }
+  ];
 
   return (
     <>
       <Helmet>
-        <title>Sobre Mí | CodeMentor</title>
-        <meta name="description" content="Conoce más sobre mi experiencia como desarrollador y profesor de programación, mi trayectoria en maratones de programación y mi enfoque educativo." />
+        <title>Sobre Mí | Jesús R. Gil - CodeMentor UCAB</title>
+        <meta 
+          name="description" 
+          content="Conoce la trayectoria de Jesús R. Gil: estudiante avanzado de Ingeniería Informática en la UCAB, competidor ICPC, ganador de hackathons y mentor de programación." 
+        />
       </Helmet>
 
       <div className="pt-20">
+        
         {/* Hero Section */}
-        <div className="bg-gradient-to-r from-blue-600 to-purple-600 text-white py-16 md:py-24">
+        <section className="bg-gradient-to-br from-blue-900 via-gray-900 to-indigo-950 text-white py-16 md:py-24 border-b border-gray-800">
           <div className="container mx-auto px-4 md:px-6">
-            <div className="flex flex-col md:flex-row items-center max-w-5xl mx-auto">
-              <div className="md:w-1/3 mb-8 md:mb-0 md:pr-8">
-                <img 
-                  src="https://images.pexels.com/photos/5490276/pexels-photo-5490276.jpeg?auto=compress&cs=tinysrgb&w=600" 
-                  alt="Profesor de Programación" 
-                  className="rounded-full w-48 h-48 md:w-64 md:h-64 object-cover border-4 border-white/20 shadow-xl mx-auto"
-                />
-              </div>
-              <div className="md:w-2/3">
-                <h1 className="text-4xl md:text-5xl font-bold mb-4">
-                  Hola, soy <span className="text-blue-200">Tu Nombre</span>
+            <div className="max-w-5xl mx-auto flex flex-col md:flex-row items-center gap-10">
+              
+              <div className="w-full md:w-2/3">
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-blue-500/20 text-blue-300 border border-blue-500/30 mb-4">
+                  <GraduationCap size={15} />
+                  Estudiante Avanzado de Ingeniería Informática • UCAB
+                </div>
+
+                <h1 className="text-4xl md:text-5xl font-black mb-3 tracking-tight">
+                  Jesús R. Gil
                 </h1>
-                <p className="text-xl text-blue-100 mb-6">
-                  Desarrollador de software con más de 8 años de experiencia y apasionado por enseñar programación
+
+                <p className="text-lg md:text-xl text-blue-200 font-medium mb-6">
+                  Backend Developer | AI & Web3 | Competidor ICPC
                 </p>
-                <div className="flex flex-wrap gap-4">
-                  <span className="bg-white/10 px-3 py-1 rounded-full text-sm">Desarrollador Full Stack</span>
-                  <span className="bg-white/10 px-3 py-1 rounded-full text-sm">Profesor de Programación</span>
-                  <span className="bg-white/10 px-3 py-1 rounded-full text-sm">Competidor en Maratones</span>
-                  <span className="bg-white/10 px-3 py-1 rounded-full text-sm">Mentor Tecnológico</span>
+
+                <p className="text-sm md:text-base text-gray-300 leading-relaxed mb-6">
+                  Mi trayectoria técnica combina la rigurosidad del código de bajo y alto nivel con la resolución algorítmica bajo restricciones estrictas de tiempo y memoria. He representado a la UCAB en el Super Regional ICPC y obtenido podios en maratones de programación. Como tutor, enseño a pensar con criterio de ingeniería, sin atajos ni código a ciegas.
+                </p>
+
+                {/* Enlaces de Contacto y Redes */}
+                <div className="flex flex-wrap items-center gap-3">
+                  <a
+                    href="https://www.linkedin.com/in/jesus-r-gil/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold px-4 py-2.5 rounded-lg transition-colors shadow-sm"
+                  >
+                    <Linkedin size={15} />
+                    LinkedIn
+                  </a>
+                  <a
+                    href={CONTACT_CONFIG.githubUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 bg-gray-800 hover:bg-gray-700 text-white text-xs font-semibold px-4 py-2.5 rounded-lg border border-gray-700 transition-colors"
+                  >
+                    <Github size={15} />
+                    GitHub ({CONTACT_CONFIG.githubUser})
+                  </a>
+                  <a
+                    href={getWhatsappUrl()}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-semibold px-4 py-2.5 rounded-lg transition-colors shadow-sm"
+                  >
+                    <MessageCircle size={15} />
+                    WhatsApp
+                  </a>
                 </div>
               </div>
+
+              {/* Card Resumen Rápido */}
+              <div className="w-full md:w-1/3 bg-white/5 backdrop-blur-md rounded-2xl p-6 border border-white/10 shadow-xl text-xs space-y-4">
+                <h3 className="text-sm font-bold text-white uppercase tracking-wider border-b border-white/10 pb-2">
+                  Ficha Técnica
+                </h3>
+                <div>
+                  <span className="text-gray-400 block mb-0.5">Ubicación:</span>
+                  <span className="font-semibold text-white">Caracas, Venezuela</span>
+                </div>
+                <div>
+                  <span className="text-gray-400 block mb-0.5">Alma Máter:</span>
+                  <span className="font-semibold text-white">Universidad Católica Andrés Bello (UCAB)</span>
+                </div>
+                <div>
+                  <span className="text-gray-400 block mb-0.5">Especialidad en Tutorías:</span>
+                  <span className="font-semibold text-blue-400">Estructura de Datos, Bases de Datos, POO</span>
+                </div>
+                <div>
+                  <span className="text-gray-400 block mb-0.5">Correo directo:</span>
+                  <span className="font-semibold text-white break-all">{CONTACT_CONFIG.email}</span>
+                </div>
+              </div>
+
             </div>
           </div>
-        </div>
+        </section>
 
-        {/* My Story */}
-        <Section background="white">
-          <div className="max-w-4xl mx-auto">
-            <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-6 text-center">
-              Mi Historia
-            </h2>
-            <p className="text-lg text-gray-700 dark:text-gray-300 mb-6">
-              Mi viaje en la programación comenzó hace más de una década, cuando descubrí que podía crear soluciones a problemas reales a través del código. 
-              Lo que empezó como curiosidad se convirtió en pasión cuando participé en mi primera maratón de programación durante la universidad.
-            </p>
-            <p className="text-lg text-gray-700 dark:text-gray-300 mb-6">
-              A lo largo de mi carrera profesional, he trabajado en startups y empresas de tecnología, desarrollando 
-              aplicaciones utilizadas por miles de usuarios. Esta experiencia me ha permitido comprender los desafíos 
-              reales que enfrentan los desarrolladores y las habilidades que son verdaderamente valoradas en la industria.
-            </p>
-            <p className="text-lg text-gray-700 dark:text-gray-300 mb-6">
-              Mi camino como profesor comenzó informalmente, ayudando a compañeros de trabajo y amigos a mejorar sus habilidades. 
-              Pronto descubrí que tenía una habilidad natural para explicar conceptos complejos de manera simple y accesible. 
-              Ver el progreso de mis estudiantes y su transformación profesional se ha convertido en mi mayor satisfacción.
-            </p>
-            <div className="mt-8 flex justify-center">
-              <Button to="/contacto" variant="primary" size="lg">
-                Conectemos
-              </Button>
-            </div>
-          </div>
-        </Section>
-
-        {/* Experience */}
-        <Section background="light">
-          <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-12 text-center">
-            Mi Experiencia
-          </h2>
-          
+        {/* Logros y Liderazgo */}
+        <Section
+          title="Logros, Competencias y Liderazgo"
+          subtitle="Resultados comprobados en programación competitiva, hackathons y liderazgo de comunidades técnicas"
+          centered
+          background="light"
+        >
           <motion.div
             variants={containerVariants}
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true }}
-            className="space-y-8 max-w-3xl mx-auto"
+            viewport={{ once: true, margin: "-80px" }}
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto"
           >
-            <motion.div
-              variants={itemVariants}
-              className="flex gap-6"
-            >
-              <div className="mt-1">
-                <div className="flex items-center justify-center w-12 h-12 rounded-full bg-blue-100 dark:bg-blue-900/30">
-                  <Briefcase className="w-6 h-6 text-blue-600 dark:text-blue-400" />
+            {achievements.map((item, index) => (
+              <motion.div
+                key={index}
+                variants={itemVariants}
+                className="bg-white dark:bg-gray-800 p-6 rounded-2xl border border-gray-200 dark:border-gray-700 shadow-sm hover:shadow-md transition-all flex flex-col justify-between"
+              >
+                <div>
+                  <div className="w-10 h-10 rounded-xl bg-blue-50 dark:bg-blue-950/60 text-blue-600 dark:text-blue-400 flex items-center justify-center mb-4">
+                    <Trophy size={20} />
+                  </div>
+                  <h3 className="text-base font-bold text-gray-900 dark:text-white mb-1">
+                    {item.title}
+                  </h3>
+                  <p className="text-xs font-semibold text-blue-600 dark:text-blue-400 mb-3">
+                    {item.organization}
+                  </p>
+                  <p className="text-xs text-gray-600 dark:text-gray-300 leading-relaxed">
+                    {item.description}
+                  </p>
                 </div>
-              </div>
-              <div className="flex-1">
-                <h3 className="text-xl font-bold text-gray-900 dark:text-white">
-                  Desarrollador Senior en TechCorp
-                </h3>
-                <p className="text-gray-500 dark:text-gray-400 mb-2">2019 - Presente</p>
-                <p className="text-gray-700 dark:text-gray-300">
-                  Desarrollo de aplicaciones web y móviles para clientes empresariales. Liderazgo 
-                  de equipos de desarrollo y mentoría de desarrolladores junior.
-                </p>
-              </div>
-            </motion.div>
-            
-            <motion.div
-              variants={itemVariants}
-              className="flex gap-6"
-            >
-              <div className="mt-1">
-                <div className="flex items-center justify-center w-12 h-12 rounded-full bg-purple-100 dark:bg-purple-900/30">
-                  <Code className="w-6 h-6 text-purple-600 dark:text-purple-400" />
-                </div>
-              </div>
-              <div className="flex-1">
-                <h3 className="text-xl font-bold text-gray-900 dark:text-white">
-                  Desarrollador Full Stack en StartupX
-                </h3>
-                <p className="text-gray-500 dark:text-gray-400 mb-2">2016 - 2019</p>
-                <p className="text-gray-700 dark:text-gray-300">
-                  Implementación de características clave para una plataforma SaaS enfocada en el sector educativo. 
-                  Trabajo con React, Node.js y bases de datos NoSQL.
-                </p>
-              </div>
-            </motion.div>
-            
-            <motion.div
-              variants={itemVariants}
-              className="flex gap-6"
-            >
-              <div className="mt-1">
-                <div className="flex items-center justify-center w-12 h-12 rounded-full bg-green-100 dark:bg-green-900/30">
-                  <Users className="w-6 h-6 text-green-600 dark:text-green-400" />
-                </div>
-              </div>
-              <div className="flex-1">
-                <h3 className="text-xl font-bold text-gray-900 dark:text-white">
-                  Mentor en Bootcamp de Programación
-                </h3>
-                <p className="text-gray-500 dark:text-gray-400 mb-2">2018 - Presente</p>
-                <p className="text-gray-700 dark:text-gray-300">
-                  Enseñanza de desarrollo web y mentoría a grupos de estudiantes. Diseño de 
-                  currículum práctico y evaluación de proyectos finales.
-                </p>
-              </div>
-            </motion.div>
-            
-            <motion.div
-              variants={itemVariants}
-              className="flex gap-6"
-            >
-              <div className="mt-1">
-                <div className="flex items-center justify-center w-12 h-12 rounded-full bg-yellow-100 dark:bg-yellow-900/30">
-                  <Award className="w-6 h-6 text-yellow-600 dark:text-yellow-400" />
-                </div>
-              </div>
-              <div className="flex-1">
-                <h3 className="text-xl font-bold text-gray-900 dark:text-white">
-                  Participante en Maratones de Programación
-                </h3>
-                <p className="text-gray-500 dark:text-gray-400 mb-2">2014 - Presente</p>
-                <p className="text-gray-700 dark:text-gray-300">
-                  Competidor en más de 50 maratones nacionales e internacionales. Semifinalista 
-                  en el International Collegiate Programming Contest (ICPC).
-                </p>
-              </div>
-            </motion.div>
+              </motion.div>
+            ))}
           </motion.div>
         </Section>
 
-        {/* Education & Certifications */}
-        <Section background="white">
-          <div className="max-w-4xl mx-auto">
-            <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-12 text-center">
-              Educación y Certificaciones
-            </h2>
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              <div className="bg-gray-50 dark:bg-gray-800 p-6 rounded-xl border border-gray-200 dark:border-gray-700">
-                <div className="flex items-center mb-4">
-                  <GraduationCap size={24} className="text-blue-600 dark:text-blue-400 mr-3" />
-                  <h3 className="text-xl font-bold text-gray-900 dark:text-white">Educación Formal</h3>
+        {/* Stack Tecnológico */}
+        <Section
+          title="Stack Tecnológico y Fundamentos"
+          subtitle="Dominio técnico de bajo y alto nivel aplicado tanto al desarrollo backend como a la enseñanza"
+          centered
+          background="white"
+        >
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
+            {skillGroups.map((group, idx) => (
+              <div
+                key={idx}
+                className="bg-gray-50 dark:bg-gray-800 p-6 rounded-2xl border border-gray-200 dark:border-gray-700"
+              >
+                <h3 className="text-sm font-bold text-gray-900 dark:text-white uppercase tracking-wider mb-4 border-b border-gray-200 dark:border-gray-700 pb-2">
+                  {group.category}
+                </h3>
+                <div className="flex flex-wrap gap-1.5">
+                  {group.skills.map((skill, sIdx) => (
+                    <span
+                      key={sIdx}
+                      className="text-xs font-medium bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-200 px-2.5 py-1 rounded-lg border border-gray-200 dark:border-gray-600"
+                    >
+                      {skill}
+                    </span>
+                  ))}
                 </div>
-                <ul className="space-y-4">
-                  <li>
-                    <h4 className="font-semibold text-gray-900 dark:text-white">Maestría en Ciencias de la Computación</h4>
-                    <p className="text-gray-500 dark:text-gray-400">Universidad Tecnológica Nacional, 2015-2017</p>
-                    <p className="text-gray-700 dark:text-gray-300 text-sm">Especialización en Inteligencia Artificial y Algoritmos Avanzados</p>
-                  </li>
-                  <li>
-                    <h4 className="font-semibold text-gray-900 dark:text-white">Ingeniería en Sistemas</h4>
-                    <p className="text-gray-500 dark:text-gray-400">Universidad de Buenos Aires, 2010-2014</p>
-                    <p className="text-gray-700 dark:text-gray-300 text-sm">Graduado con honores. Tesis sobre optimización de algoritmos de búsqueda.</p>
-                  </li>
-                </ul>
               </div>
-              
-              <div className="bg-gray-50 dark:bg-gray-800 p-6 rounded-xl border border-gray-200 dark:border-gray-700">
-                <div className="flex items-center mb-4">
-                  <Award size={24} className="text-blue-600 dark:text-blue-400 mr-3" />
-                  <h3 className="text-xl font-bold text-gray-900 dark:text-white">Certificaciones</h3>
-                </div>
-                <ul className="space-y-4">
-                  <li>
-                    <h4 className="font-semibold text-gray-900 dark:text-white">AWS Certified Solutions Architect</h4>
-                    <p className="text-gray-500 dark:text-gray-400">Amazon Web Services, 2022</p>
-                  </li>
-                  <li>
-                    <h4 className="font-semibold text-gray-900 dark:text-white">Google Professional Cloud Developer</h4>
-                    <p className="text-gray-500 dark:text-gray-400">Google Cloud, 2020</p>
-                  </li>
-                  <li>
-                    <h4 className="font-semibold text-gray-900 dark:text-white">MongoDB Certified Developer</h4>
-                    <p className="text-gray-500 dark:text-gray-400">MongoDB, 2019</p>
-                  </li>
-                  <li>
-                    <h4 className="font-semibold text-gray-900 dark:text-white">Microsoft Certified: Azure Developer Associate</h4>
-                    <p className="text-gray-500 dark:text-gray-400">Microsoft, 2018</p>
-                  </li>
-                </ul>
-              </div>
-            </div>
-            
-            <div className="mt-12 p-6 bg-blue-50 dark:bg-blue-900/20 rounded-xl border border-blue-100 dark:border-blue-800">
-              <div className="flex items-center mb-4">
-                <Book size={24} className="text-blue-600 dark:text-blue-400 mr-3" />
-                <h3 className="text-xl font-bold text-gray-900 dark:text-white">Aprendizaje Continuo</h3>
-              </div>
-              <p className="text-gray-700 dark:text-gray-300 mb-4">
-                Creo firmemente en el aprendizaje continuo como filosofía de vida. Dedico al menos 5 horas semanales 
-                a estudiar nuevas tecnologías, leer libros técnicos y participar en comunidades de desarrollo.
-              </p>
-              <p className="text-gray-700 dark:text-gray-300">
-                Este compromiso con el crecimiento constante me permite mantenerme actualizado en un campo que 
-                evoluciona rápidamente y transmitir conocimientos relevantes y actualizados a mis estudiantes.
-              </p>
-            </div>
+            ))}
           </div>
         </Section>
 
-        {/* CTA Section */}
-        <Section background="gradient">
-          <div className="max-w-3xl mx-auto text-center">
-            <h2 className="text-3xl md:text-4xl font-bold mb-6">
-              ¿Quieres trabajar juntos?
-            </h2>
-            <p className="text-xl text-blue-100 mb-8">
-              Estoy disponible para mentorías personalizadas, workshops y consultoría
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button 
-                to="/contacto" 
-                variant="outline" 
-                size="lg"
-                className="bg-white text-blue-600 border-white hover:bg-blue-50"
-              >
-                Contactar
-              </Button>
-              <Button 
-                to="/calendario" 
-                variant="ghost" 
-                size="lg"
-                className="text-white border border-white/30 hover:bg-white/10"
-              >
-                Agendar una llamada
-              </Button>
+        {/* Educación y Certificaciones */}
+        <Section
+          title="Educación y Certificaciones"
+          subtitle="Base académica y certificaciones internacionales continuas"
+          centered
+          background="light"
+        >
+          <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6">
+            
+            <div className="bg-white dark:bg-gray-800 p-6 rounded-2xl border border-gray-200 dark:border-gray-700">
+              <div className="flex items-center gap-3 mb-4">
+                <GraduationCap className="w-6 h-6 text-blue-600 dark:text-blue-400" />
+                <h3 className="text-base font-bold text-gray-900 dark:text-white">
+                  Formación Universitaria
+                </h3>
+              </div>
+              <ul className="space-y-4 text-xs text-gray-700 dark:text-gray-300">
+                <div>
+                  <p className="font-bold text-gray-900 dark:text-white text-sm">
+                    Ingeniería Informática (En curso)
+                  </p>
+                  <p className="text-gray-500">Universidad Católica Andrés Bello (UCAB)</p>
+                  <p className="text-gray-500 mt-1">Enfoque en arquitectura de software, bases de datos y algoritmos.</p>
+                </div>
+                <div className="pt-2 border-t border-gray-100 dark:border-gray-700">
+                  <p className="font-bold text-gray-900 dark:text-white text-sm">
+                    Diplomado en Desarrollo Blockchain & Web3
+                  </p>
+                  <p className="text-gray-500">Universidad Católica Andrés Bello (UCAB)</p>
+                </div>
+              </ul>
             </div>
+
+            <div className="bg-white dark:bg-gray-800 p-6 rounded-2xl border border-gray-200 dark:border-gray-700">
+              <div className="flex items-center gap-3 mb-4">
+                <Award className="w-6 h-6 text-emerald-600 dark:text-emerald-400" />
+                <h3 className="text-base font-bold text-gray-900 dark:text-white">
+                  Certificaciones Oficiales
+                </h3>
+              </div>
+              <ul className="space-y-3 text-xs text-gray-700 dark:text-gray-300">
+                <li className="flex items-start gap-2">
+                  <CheckCircle2 size={16} className="text-emerald-500 flex-shrink-0 mt-0.5" />
+                  <div>
+                    <span className="font-semibold text-gray-900 dark:text-white">GitHub Foundations</span>
+                    <p className="text-[11px] text-gray-500">Certificación oficial en flujos de trabajo de Git y GitHub.</p>
+                  </div>
+                </li>
+                <li className="flex items-start gap-2">
+                  <CheckCircle2 size={16} className="text-emerald-500 flex-shrink-0 mt-0.5" />
+                  <div>
+                    <span className="font-semibold text-gray-900 dark:text-white">Generative AI Foundations</span>
+                    <p className="text-[11px] text-gray-500">Amazon Web Services (AWS).</p>
+                  </div>
+                </li>
+                <li className="flex items-start gap-2">
+                  <CheckCircle2 size={16} className="text-emerald-500 flex-shrink-0 mt-0.5" />
+                  <div>
+                    <span className="font-semibold text-gray-900 dark:text-white">C/C++ & Java Fundamentals</span>
+                    <p className="text-[11px] text-gray-500">Certificaciones técnicas en Platzi y Udemy.</p>
+                  </div>
+                </li>
+              </ul>
+            </div>
+
+          </div>
+
+          {/* CTA hacia Tutorías */}
+          <div className="mt-12 text-center">
+            <Button to="/ucab" variant="primary" size="lg">
+              Ver tutorías para la UCAB
+            </Button>
           </div>
         </Section>
+
       </div>
     </>
   );
