@@ -40,6 +40,7 @@ const Header: React.FC = () => {
 
   const navLinks = [
     { name: 'Inicio', path: '/' },
+    { name: 'Tutorías', path: '/ucab' },
     { name: 'Recursos', path: '/recursos' },
     { name: 'Proyectos', path: '/proyectos' },
     { name: 'Metodología', path: '/metodologia' },

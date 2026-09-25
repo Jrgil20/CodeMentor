@@ -84,11 +84,11 @@ const Hero: React.FC = () => {
               className="flex flex-col sm:flex-row gap-4"
               variants={itemVariants}
             >
-              <Button to="/contacto" size="lg" variant="primary">
-                Consultar disponibilidad
+              <Button to="/ucab" size="lg" variant="primary">
+                Ver tutorías UCAB
               </Button>
-              <Button to="/auto-evaluacion" size="lg" variant="outline">
-                Diagnóstico de nivel
+              <Button to="/contacto" size="lg" variant="outline">
+                Consultar disponibilidad
               </Button>
             </motion.div>
           </motion.div>

@@ -12,6 +12,7 @@ import SelfAssessmentPage from './pages/SelfAssessmentPage';
 import ContactPage from './pages/ContactPage';
 import CalendarPage from './pages/CalendarPage';
 import BlogPage from './pages/BlogPage';
+import UcabLandingPage from './pages/UcabLandingPage';
 
 function App() {
   // Detect dark mode preference
@@ -43,6 +44,7 @@ function App() {
             <Route path="/contacto" element={<ContactPage />} />
             <Route path="/calendario" element={<CalendarPage />} />
             <Route path="/blog" element={<BlogPage />} />
+            <Route path="/ucab" element={<UcabLandingPage />} />
           </Routes>
         </main>
         <Footer />
