@@ -3,56 +3,64 @@ import { Resource } from '../types';
 export const resources: Resource[] = [
   {
     id: 1,
-    title: "Introducción a los Algoritmos",
-    description: "Guía completa sobre algoritmos fundamentales con ejemplos prácticos y explicaciones detalladas para principiantes.",
-    category: "Algoritmos",
-    type: "article",
-    link: "#resource-1",
-    image: "https://images.pexels.com/photos/4164418/pexels-photo-4164418.jpeg?auto=compress&cs=tinysrgb&w=600"
+    title: "gapto10-cfpp",
+    description: "Herramienta para el seguimiento, gestión y cálculo ponderado de notas académicas universitarias.",
+    category: "Herramientas",
+    tag: "herramienta",
+    type: "tool",
+    link: "https://github.com/Jrgil20/gapto10-cfpp",
+    image: "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&w=600&q=80",
+    pinned: true
   },
   {
     id: 2,
-    title: "Desarrollo Web Moderno",
-    description: "Serie de videos explicando las tecnologías actuales de desarrollo web frontend y las mejores prácticas.",
-    category: "Desarrollo Web",
-    type: "video",
-    link: "#resource-2",
-    image: "https://images.pexels.com/photos/11035380/pexels-photo-11035380.jpeg?auto=compress&cs=tinysrgb&w=600"
+    title: "Asesorias_Estructuta-de-Datos",
+    description: "Guías técnicas, ejercicios prácticos y material de apoyo sobre estructuras de datos fundamentales y análisis de complejidad algorítmica (Big O).",
+    category: "Estructuras de Datos",
+    tag: "lab",
+    type: "lab",
+    link: "https://github.com/Jrgil20/Asesorias_Estructuta-de-Datos",
+    image: "https://images.unsplash.com/photo-1516116211227-bbc141e57c66?auto=format&fit=crop&w=600&q=80",
+    pinned: true
   },
   {
     id: 3,
-    title: "Tutorial de Estructuras de Datos",
-    description: "Tutorial interactivo que cubre las estructuras de datos más importantes con visualizaciones y ejercicios.",
-    category: "Estructuras de Datos",
-    type: "tutorial",
-    link: "#resource-3",
-    image: "https://images.pexels.com/photos/4021521/pexels-photo-4021521.jpeg?auto=compress&cs=tinysrgb&w=600"
+    title: "IA-AprendizajeAutomatico_Labs",
+    description: "Laboratorios prácticos de inteligencia artificial y aprendizaje automático (modelos predictivos, clasificación, regresión y procesamiento de datos).",
+    category: "Inteligencia Artificial",
+    tag: "lab",
+    type: "lab",
+    link: "https://github.com/Jrgil20/IA-AprendizajeAutomatico_Labs",
+    image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=600&q=80"
   },
   {
     id: 4,
-    title: "Patrones de Diseño en JavaScript",
-    description: "Guía completa de patrones de diseño con ejemplos prácticos implementados en JavaScript moderno.",
-    category: "JavaScript",
-    type: "article",
-    link: "#resource-4",
-    image: "https://images.pexels.com/photos/577585/pexels-photo-577585.jpeg?auto=compress&cs=tinysrgb&w=600"
+    title: "PracticasCiberSeguridad",
+    description: "Prácticas y laboratorios de ciberseguridad, análisis de vulnerabilidades, exploits didácticos y seguridad informática.",
+    category: "Ciberseguridad",
+    tag: "lab",
+    type: "lab",
+    link: "https://github.com/Jrgil20/PracticasCiberSeguridad",
+    image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=600&q=80"
   },
   {
     id: 5,
-    title: "Herramientas de Productividad para Programadores",
-    description: "Colección curada de herramientas y extensiones para mejorar la productividad y el flujo de trabajo de desarrollo.",
-    category: "Productividad",
-    type: "tool",
-    link: "#resource-5",
-    image: "https://images.pexels.com/photos/1181271/pexels-photo-1181271.jpeg?auto=compress&cs=tinysrgb&w=600"
+    title: "class-transcription-worker",
+    description: "Servicio worker en segundo plano para la ingesta, transcripción automatizada y procesamiento de audio/clases.",
+    category: "Desarrollo Backend",
+    tag: "proyecto",
+    type: "project",
+    link: "https://github.com/Jrgil20/class-transcription-worker",
+    image: "https://images.unsplash.com/photo-1589254065878-42c9da997008?auto=format&fit=crop&w=600&q=80"
   },
   {
     id: 6,
-    title: "Python para Ciencia de Datos",
-    description: "Tutorial introductorio a Python enfocado en análisis de datos, numpy, pandas y visualización con matplotlib.",
-    category: "Python",
-    type: "tutorial",
-    link: "#resource-6",
-    image: "https://images.pexels.com/photos/577585/pexels-photo-577585.jpeg?auto=compress&cs=tinysrgb&w=600"
+    title: "Numerical_methods",
+    description: "Implementación de algoritmos y métodos de análisis numérico (solución de ecuaciones no lineales, sistemas de ecuaciones, interpolación e integración).",
+    category: "Algoritmos",
+    tag: "lab",
+    type: "lab",
+    link: "https://github.com/Jrgil20/Numerical_methods",
+    image: "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?auto=format&fit=crop&w=600&q=80"
   }
 ];

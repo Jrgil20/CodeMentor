@@ -2,7 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Check, BookOpen, AlertCircle, MessageCircle } from 'lucide-react';
 import Button from '../common/Button';
-import { UCAB_SUBJECTS, TUTORING_PLANS, TUTORING_LIMITS } from '../../data/tutoring';
+import { UCAB_SUBJECTS, TUTORING_PLANS, TUTORING_LIMITS, getWhatsappUrl } from '../../data/tutoring';
 
 const UcabTutoring: React.FC = () => {
   const cardVariants = {
@@ -33,7 +33,7 @@ const UcabTutoring: React.FC = () => {
               </div>
             </div>
             <a
-              href="https://wa.me/584120000000?text=Hola!%20Quisiera%20consultar%20disponibilidad%20de%20cupo%20para%20tutor%C3%ADas%20UCAB"
+              href={getWhatsappUrl('Hola! Quisiera consultar disponibilidad de cupo para tutorías UCAB')}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 whitespace-nowrap bg-emerald-600 hover:bg-emerald-700 text-white text-xs md:text-sm font-semibold px-4 py-2 rounded-lg transition-colors shadow-sm"

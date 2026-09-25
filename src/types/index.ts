@@ -1,3 +1,5 @@
+export type ResourceTag = 'herramienta' | 'lab' | 'proyecto';
+
 export interface Testimonial {
   id: number;
   name: string;
@@ -18,6 +20,8 @@ export interface Project {
   tags: string[];
   image: string;
   link: string;
+  pinned?: boolean;
+  tag?: ResourceTag;
 }
 
 export interface BlogPost {
@@ -37,9 +41,11 @@ export interface Resource {
   title: string;
   description: string;
   category: string;
+  tag: ResourceTag;
   type: 'video' | 'article' | 'tutorial' | 'tool';
   link: string;
   image: string;
+  pinned?: boolean;
 }
 
 export interface Course {

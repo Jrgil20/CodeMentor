@@ -3,34 +3,58 @@ import { Project } from '../types';
 export const projects: Project[] = [
   {
     id: 1,
-    title: "Sistema de Gestión de Inventario",
-    description: "Aplicación full-stack desarrollada con React, Node.js y MongoDB para gestionar inventarios de pequeñas empresas. Incluye gestión de usuarios, reportes y análisis de productos.",
-    tags: ["React", "Node.js", "MongoDB", "Express"],
-    image: "https://images.pexels.com/photos/7947941/pexels-photo-7947941.jpeg?auto=compress&cs=tinysrgb&w=600",
-    link: "#project-1"
+    title: "gapto10-cfpp",
+    description: "Herramienta especializada para el seguimiento, gestión y cálculo ponderado de notas académicas universitarias.",
+    tags: ["Herramienta", "Académico", "Productividad"],
+    image: "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&w=600&q=80",
+    link: "https://github.com/Jrgil20/gapto10-cfpp",
+    pinned: true,
+    tag: "herramienta"
   },
   {
     id: 2,
-    title: "Plataforma de Cursos Online",
-    description: "Plataforma educativa con sistema de autenticación, gestión de contenido, reproductor de video personalizado y seguimiento del progreso de los estudiantes.",
-    tags: ["TypeScript", "Next.js", "PostgreSQL", "Tailwind CSS"],
-    image: "https://images.pexels.com/photos/5428833/pexels-photo-5428833.jpeg?auto=compress&cs=tinysrgb&w=600",
-    link: "#project-2"
+    title: "class-transcription-worker",
+    description: "Servicio worker en segundo plano para la ingesta, transcripción automatizada y procesamiento de audio/clases.",
+    tags: ["Worker", "Audio", "Backend", "Automatización"],
+    image: "https://images.unsplash.com/photo-1589254065878-42c9da997008?auto=format&fit=crop&w=600&q=80",
+    link: "https://github.com/Jrgil20/class-transcription-worker",
+    tag: "proyecto"
   },
   {
     id: 3,
-    title: "Aplicación de Seguimiento Fitness",
-    description: "Aplicación móvil para seguimiento de rutinas de ejercicio, nutrición y progreso físico. Incluye gráficos personalizados y recomendaciones basadas en datos.",
-    tags: ["React Native", "Firebase", "Redux", "Chart.js"],
-    image: "https://images.pexels.com/photos/2526878/pexels-photo-2526878.jpeg?auto=compress&cs=tinysrgb&w=600",
-    link: "#project-3"
+    title: "IA-AprendizajeAutomatico_Labs",
+    description: "Laboratorios prácticos de inteligencia artificial y aprendizaje automático: modelos predictivos, clasificación, regresión y procesamiento de datos.",
+    tags: ["Machine Learning", "Python", "Data Science", "Laboratorios"],
+    image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=600&q=80",
+    link: "https://github.com/Jrgil20/IA-AprendizajeAutomatico_Labs",
+    tag: "lab"
   },
   {
     id: 4,
-    title: "Sistema de Análisis de Datos",
-    description: "Dashboard interactivo para visualización y análisis de grandes conjuntos de datos. Implementa técnicas avanzadas de filtrado y gráficos personalizables.",
-    tags: ["Python", "Django", "D3.js", "NumPy"],
-    image: "https://images.pexels.com/photos/590022/pexels-photo-590022.jpeg?auto=compress&cs=tinysrgb&w=600",
-    link: "#project-4"
+    title: "PracticasCiberSeguridad",
+    description: "Prácticas y laboratorios de ciberseguridad, análisis de vulnerabilidades, exploits didácticos y seguridad informática defensiva.",
+    tags: ["Ciberseguridad", "Vulnerabilidades", "Networking"],
+    image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=600&q=80",
+    link: "https://github.com/Jrgil20/PracticasCiberSeguridad",
+    tag: "lab"
+  },
+  {
+    id: 5,
+    title: "Asesorias_Estructuta-de-Datos",
+    description: "Material de apoyo y guías de código para asesorías y tutorías de estructuras de datos fundamentales y análisis de complejidad (Big O).",
+    tags: ["Estructuras de Datos", "Algoritmos", "UCAB", "C/C++"],
+    image: "https://images.unsplash.com/photo-1516116211227-bbc141e57c66?auto=format&fit=crop&w=600&q=80",
+    link: "https://github.com/Jrgil20/Asesorias_Estructuta-de-Datos",
+    pinned: true,
+    tag: "lab"
+  },
+  {
+    id: 6,
+    title: "Numerical_methods",
+    description: "Implementación rigurosa de algoritmos y métodos de análisis numérico para solución de ecuaciones, sistemas, interpolación e integración.",
+    tags: ["Métodos Numéricos", "Algoritmos", "Matemática Aplicada"],
+    image: "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?auto=format&fit=crop&w=600&q=80",
+    link: "https://github.com/Jrgil20/Numerical_methods",
+    tag: "lab"
   }
 ];

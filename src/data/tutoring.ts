@@ -5,8 +5,15 @@ export const UCAB_SUBJECTS: Subject[] = [
     id: 'ed',
     name: 'Estructura de Datos',
     isMain: true,
-    description: 'Enfoque principal: Listas enlazadas, árboles binarios, AVL, grafos, tablas hash y complejidad algorítmica (Big O).',
+    description: 'Enfoque prioritario: Listas enlazadas, árboles binarios, AVL, grafos, tablas hash y complejidad algorítmica (Big O).',
     topics: ['Memoria dinámica', 'Punteros y referencias', 'Árboles y Grafos', 'Optimización y Big O']
+  },
+  {
+    id: 'bd',
+    name: 'Bases de Datos',
+    isMain: true,
+    description: 'Enfoque prioritario: Modelo relacional, álgebra relacional, normalización (1FN a BCNF), SQL avanzado, transacciones (ACID) e indexación.',
+    topics: ['Modelo E/R y Relacional', 'Normalización (1FN-BCNF)', 'SQL Avanzado', 'Transacciones y ACID']
   },
   {
     id: 'poo',
@@ -126,6 +133,14 @@ export const TUTORING_LIMITS = {
 
 export const CONTACT_CONFIG = {
   formspreeEndpoint: 'https://formspree.io/f/xeojygpr',
-  whatsappNumber: '+584120000000', // Modificable
-  whatsappMessage: 'Hola! Me interesa agendar tutorías para la UCAB (Estructura de Datos / Programación).'
+  whatsappNumber: '584248981415',
+  email: 'jrgil.20@est.ucab.edu.ve',
+  githubUser: 'Jrgil20',
+  githubUrl: 'https://github.com/Jrgil20',
+  defaultWhatsappMessage: 'Hola! Me interesa agendar tutorías para la UCAB (Estructura de Datos / Bases de Datos / Programación).'
+};
+
+export const getWhatsappUrl = (message?: string): string => {
+  const text = message ? encodeURIComponent(message) : encodeURIComponent(CONTACT_CONFIG.defaultWhatsappMessage);
+  return `https://wa.me/${CONTACT_CONFIG.whatsappNumber}?text=${text}`;
 };

@@ -5,7 +5,6 @@ import UcabTutoring from '../components/home/UcabTutoring';
 import FeaturedCourses from '../components/home/FeaturedCourses';
 import Testimonials from '../components/home/Testimonials';
 import FeaturedProjects from '../components/home/FeaturedProjects';
-import BlogPreview from '../components/home/BlogPreview';
 import CTASection from '../components/home/CTASection';
 
 const HomePage: React.FC = () => {
@@ -21,7 +20,6 @@ const HomePage: React.FC = () => {
       <FeaturedCourses />
       <Testimonials />
       <FeaturedProjects />
-      <BlogPreview />
       <CTASection />
     </>
   );
