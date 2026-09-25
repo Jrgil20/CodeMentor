@@ -65,26 +65,28 @@ const UcabTutoring: React.FC = () => {
               key={subject.id}
               className={`p-5 rounded-xl border transition-all ${
                 subject.isMain
-                  ? 'bg-blue-50/70 dark:bg-blue-950/30 border-blue-300 dark:border-blue-700 ring-2 ring-blue-500/20'
-                  : 'bg-white dark:bg-gray-850 border-gray-200 dark:border-gray-700 hover:border-blue-300 dark:hover:border-blue-700'
+                  ? 'bg-blue-50/70 dark:bg-blue-950/40 border-blue-400 dark:border-blue-600 ring-2 ring-blue-500/20 shadow-sm'
+                  : 'bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 hover:border-blue-300 dark:hover:border-blue-700'
               }`}
             >
-              <div className="flex items-center justify-between mb-2">
-                <span className="text-xs font-semibold px-2 py-0.5 rounded bg-blue-100 dark:bg-blue-900/50 text-blue-700 dark:text-blue-300">
-                  {subject.isMain ? '★ Enfoque Principal' : 'Materia UCAB'}
-                </span>
-              </div>
-              <h3 className="font-bold text-base text-gray-900 dark:text-white mb-2">
+              {subject.isMain && (
+                <div className="mb-2.5">
+                  <span className="text-xs font-bold px-2.5 py-0.5 rounded-full bg-blue-100 dark:bg-blue-900/70 text-blue-700 dark:text-blue-300">
+                    ★ Enfoque Principal
+                  </span>
+                </div>
+              )}
+              <h3 className="font-bold text-lg text-gray-900 dark:text-white mb-2">
                 {subject.name}
               </h3>
-              <p className="text-xs text-gray-600 dark:text-gray-400 mb-3 leading-relaxed">
+              <p className="text-xs text-gray-600 dark:text-gray-300 mb-3 leading-relaxed">
                 {subject.description}
               </p>
               <div className="flex flex-wrap gap-1">
                 {subject.topics.map((t, idx) => (
                   <span
                     key={idx}
-                    className="text-[11px] px-2 py-0.5 rounded bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300"
+                    className="text-[11px] px-2 py-0.5 rounded bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300"
                   >
                     {t}
                   </span>
@@ -108,7 +110,7 @@ const UcabTutoring: React.FC = () => {
           {TUTORING_PLANS.map((plan, index) => (
             <motion.div
               key={plan.id}
-              className={`flex flex-col justify-between rounded-xl bg-white dark:bg-gray-850 p-6 border shadow-sm transition-all hover:shadow-md relative ${
+              className={`flex flex-col justify-between rounded-xl bg-white dark:bg-gray-800 p-6 border shadow-sm transition-all hover:shadow-md relative ${
                 plan.popular
                   ? 'border-blue-500 ring-2 ring-blue-500/20 shadow-blue-500/10'
                   : 'border-gray-200 dark:border-gray-700'
@@ -133,7 +135,7 @@ const UcabTutoring: React.FC = () => {
                   {plan.subtitle}
                 </p>
 
-                <div className="mb-4 pb-4 border-b border-gray-100 dark:border-gray-750">
+                <div className="mb-4 pb-4 border-b border-gray-100 dark:border-gray-700">
                   <div className="flex items-baseline gap-1">
                     <span className="text-3xl font-extrabold text-gray-900 dark:text-white">
                       ${plan.price}

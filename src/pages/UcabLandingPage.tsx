@@ -52,7 +52,7 @@ const UcabLandingPage: React.FC = () => {
       </Helmet>
 
       {/* Hero UCAB */}
-      <section className="pt-28 pb-16 md:pt-36 md:pb-24 bg-gradient-to-b from-blue-50/80 via-white to-gray-50 dark:from-gray-900 dark:via-gray-850 dark:to-gray-900 border-b border-gray-200 dark:border-gray-800">
+      <section className="pt-28 pb-16 md:pt-36 md:pb-24 bg-gradient-to-b from-blue-50/80 via-white to-gray-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 border-b border-gray-200 dark:border-gray-800">
         <div className="container mx-auto px-4 md:px-6">
           <div className="max-w-4xl mx-auto text-center">
             
@@ -123,17 +123,19 @@ const UcabLandingPage: React.FC = () => {
                 key={subject.id}
                 className={`p-6 rounded-2xl border transition-all ${
                   subject.isMain
-                    ? 'bg-blue-50/60 dark:bg-blue-950/30 border-blue-400 dark:border-blue-700 ring-2 ring-blue-500/20'
-                    : 'bg-white dark:bg-gray-850 border-gray-200 dark:border-gray-800'
+                    ? 'bg-blue-50/60 dark:bg-blue-950/40 border-blue-400 dark:border-blue-600 ring-2 ring-blue-500/20 shadow-sm'
+                    : 'bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-800 hover:border-blue-300 dark:hover:border-blue-700'
                 }`}
               >
-                <span className="text-[11px] font-bold uppercase tracking-wider text-blue-600 dark:text-blue-400 block mb-2">
-                  {subject.isMain ? '★ Enfoque Prioritario' : 'Materia de Carrera'}
-                </span>
-                <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-2">
+                {subject.isMain && (
+                  <span className="text-[11px] font-bold uppercase tracking-wider text-blue-600 dark:text-blue-400 block mb-2">
+                    ★ Enfoque Prioritario
+                  </span>
+                )}
+                <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">
                   {subject.name}
                 </h3>
-                <p className="text-xs text-gray-600 dark:text-gray-400 mb-4 leading-relaxed">
+                <p className="text-xs text-gray-600 dark:text-gray-300 mb-4 leading-relaxed">
                   {subject.description}
                 </p>
                 <div className="space-y-1">
@@ -151,7 +153,7 @@ const UcabLandingPage: React.FC = () => {
       </section>
 
       {/* Planes y Tarifas */}
-      <section id="tarifas" className="py-16 md:py-24 bg-gray-50 dark:bg-gray-850 border-t border-gray-200 dark:border-gray-800">
+      <section id="tarifas" className="py-16 md:py-24 bg-gray-50 dark:bg-gray-900 border-t border-gray-200 dark:border-gray-800">
         <div className="container mx-auto px-4 md:px-6">
           <div className="text-center mb-12">
             <h2 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-3">
@@ -250,7 +252,7 @@ const UcabLandingPage: React.FC = () => {
             {testimonials.map((test) => (
               <div
                 key={test.id}
-                className="bg-gray-50 dark:bg-gray-850 p-6 rounded-2xl border border-gray-200 dark:border-gray-750 flex flex-col justify-between"
+                className="bg-gray-50 dark:bg-gray-800 p-6 rounded-2xl border border-gray-200 dark:border-gray-700 flex flex-col justify-between"
               >
                 <div>
                   <div className="flex items-center justify-between gap-2 mb-3">
@@ -281,9 +283,9 @@ const UcabLandingPage: React.FC = () => {
       </section>
 
       {/* Formulario / Contacto */}
-      <section className="py-16 md:py-20 bg-gray-50 dark:bg-gray-850 border-t border-gray-200 dark:border-gray-800">
+      <section className="py-16 md:py-20 bg-gray-50 dark:bg-gray-900 border-t border-gray-200 dark:border-gray-800">
         <div className="container mx-auto px-4 md:px-6">
-          <div className="max-w-2xl mx-auto bg-white dark:bg-gray-900 p-8 rounded-2xl border border-gray-200 dark:border-gray-750 shadow-sm">
+          <div className="max-w-2xl mx-auto bg-white dark:bg-gray-900 p-8 rounded-2xl border border-gray-200 dark:border-gray-700 shadow-sm">
             <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2 text-center">
               Consultar Disponibilidad para la UCAB
             </h3>
