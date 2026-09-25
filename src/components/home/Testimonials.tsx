@@ -8,6 +8,7 @@ const Testimonials: React.FC = () => {
   const [showReviewForm, setShowReviewForm] = useState(false);
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isAnonymous, setIsAnonymous] = useState(false);
 
   const nextTestimonial = () => {
     setActiveIndex((prevIndex) => (prevIndex + 1) % testimonials.length);
@@ -129,7 +130,7 @@ const Testimonials: React.FC = () => {
                   <div className="flex items-center justify-between border-t border-gray-100 dark:border-gray-800 pt-4">
                     <div>
                       <h4 className="font-bold text-gray-900 dark:text-white text-base">
-                        {active.name}
+                        {active.isAnonymous ? 'Estudiante UCAB (Anónimo)' : active.name}
                       </h4>
                       <p className="text-xs text-blue-600 dark:text-blue-400 font-medium">
                         Materia: {active.subject}
@@ -213,8 +214,33 @@ const Testimonials: React.FC = () => {
                 <form onSubmit={handleReviewSubmit} className="space-y-3">
                   <input type="hidden" name="_subject" value="Nueva reseña de estudiante para CodeMentor" />
                   <div>
-                    <label className="block text-xs font-medium text-gray-700 dark:text-gray-300 mb-1">Tu nombre o iniciales</label>
-                    <input type="text" name="name" required placeholder="Ej: Juan D." className="w-full text-xs px-3 py-2 border rounded-md dark:bg-gray-800 dark:border-gray-700 dark:text-white" />
+                    <div className="flex items-center justify-between mb-1">
+                      <label className="block text-xs font-medium text-gray-700 dark:text-gray-300">
+                        {isAnonymous ? 'Tu nombre o contacto (privado, solo para verificar)' : 'Tu nombre o iniciales'}
+                      </label>
+                      <label className="inline-flex items-center gap-1.5 cursor-pointer text-xs text-blue-600 dark:text-blue-400 select-none">
+                        <input
+                          type="checkbox"
+                          name="is_anonymous"
+                          checked={isAnonymous}
+                          onChange={(e) => setIsAnonymous(e.target.checked)}
+                          className="w-3.5 h-3.5 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                        />
+                        <span>Publicar anónima</span>
+                      </label>
+                    </div>
+                    <input
+                      type="text"
+                      name="name"
+                      required={!isAnonymous}
+                      placeholder={isAnonymous ? 'Opcional: tu nombre/cédula para verificar (se publicará como Anónimo)' : 'Ej: Juan D.'}
+                      className="w-full text-xs px-3 py-2 border rounded-md dark:bg-gray-800 dark:border-gray-700 dark:text-white"
+                    />
+                    <input
+                      type="hidden"
+                      name="display_preference"
+                      value={isAnonymous ? 'Anónimo (No publicar nombre real)' : 'Público'}
+                    />
                   </div>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     <div>

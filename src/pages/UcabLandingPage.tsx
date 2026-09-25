@@ -289,7 +289,9 @@ const UcabLandingPage: React.FC = () => {
 
                   <div className="flex items-center justify-between border-t border-gray-200 dark:border-gray-700 pt-3">
                     <div>
-                      <h4 className="text-xs font-bold text-gray-900 dark:text-white">{test.name}</h4>
+                      <h4 className="text-xs font-bold text-gray-900 dark:text-white">
+                        {test.isAnonymous ? 'Estudiante UCAB (Anónimo)' : test.name}
+                      </h4>
                       <p className="text-[11px] text-blue-600 dark:text-blue-400">{test.subject}</p>
                     </div>
                     <div className="text-amber-400 text-xs">

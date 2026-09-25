@@ -11,6 +11,7 @@ export interface Testimonial {
   content: string;
   image?: string;
   rating?: number;
+  isAnonymous?: boolean;
 }
 
 export interface Project {
