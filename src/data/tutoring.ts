@@ -69,8 +69,8 @@ export const TUTORING_PLANS: TutoringPlan[] = [
       'Ejercicios tipo parcial UCAB',
       'Material complementario en PDF/código'
     ],
-    popular: true,
-    badge: 'Más elegido'
+    popular: false,
+    badge: 'Ahorro 20%'
   },
   {
     id: 'weekly-pack',
@@ -103,7 +103,8 @@ export const TUTORING_PLANS: TutoringPlan[] = [
       'Soporte continuo para asignaciones y proyectos',
       'Garantía de cupo reservado'
     ],
-    popular: false
+    popular: true,
+    badge: 'Más elegido'
   },
   {
     id: 'group-plan',
