@@ -8,11 +8,14 @@ import {
   Github, 
   Linkedin, 
   MessageCircle, 
-  CheckCircle2 
+  CheckCircle2,
+  Star,
+  Sparkles
 } from 'lucide-react';
 import Section from '../components/common/Section';
 import Button from '../components/common/Button';
 import { CONTACT_CONFIG, getWhatsappUrl } from '../data/tutoring';
+import { HIGHLIGHTED_GRADES, EDUCATION_PROGRAMS, STUDENT_INFO } from '../data/academic';
 
 const AboutPage: React.FC = () => {
   const containerVariants = {
@@ -104,11 +107,11 @@ const AboutPage: React.FC = () => {
               <div className="w-full md:w-2/3">
                 <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-blue-500/20 text-blue-300 border border-blue-500/30 mb-4">
                   <GraduationCap size={15} />
-                  Estudiante Avanzado de Ingeniería Informática • UCAB
+                  Estudiante Avanzado de {STUDENT_INFO.degree} • {STUDENT_INFO.university}
                 </div>
 
                 <h1 className="text-4xl md:text-5xl font-black mb-3 tracking-tight">
-                  Jesús R. Gil
+                  {STUDENT_INFO.name}
                 </h1>
 
                 <p className="text-lg md:text-xl text-blue-200 font-medium mb-6">
@@ -158,25 +161,73 @@ const AboutPage: React.FC = () => {
                 </h3>
                 <div>
                   <span className="text-gray-400 block mb-0.5">Ubicación:</span>
-                  <span className="font-semibold text-white">Caracas, Venezuela</span>
+                  <span className="font-semibold text-white">{STUDENT_INFO.location}</span>
                 </div>
                 <div>
                   <span className="text-gray-400 block mb-0.5">Alma Máter:</span>
-                  <span className="font-semibold text-white">Universidad Católica Andrés Bello (UCAB)</span>
+                  <span className="font-semibold text-white">{STUDENT_INFO.university} ({STUDENT_INFO.campus})</span>
+                </div>
+                <div>
+                  <span className="text-gray-400 block mb-0.5">Programa / Plan:</span>
+                  <span className="font-semibold text-white">{STUDENT_INFO.degree} ({STUDENT_INFO.curriculumPlan})</span>
                 </div>
                 <div>
                   <span className="text-gray-400 block mb-0.5">Especialidad en Tutorías:</span>
-                  <span className="font-semibold text-blue-400">Estructura de Datos, Bases de Datos, POO</span>
+                  <span className="font-semibold text-blue-400">Algoritmos, Estructura de Datos, Bases de Datos, Dev Software</span>
                 </div>
                 <div>
-                  <span className="text-gray-400 block mb-0.5">Correo directo:</span>
-                  <span className="font-semibold text-white break-all">{CONTACT_CONFIG.email}</span>
+                  <span className="text-gray-400 block mb-0.5">Correo institucional:</span>
+                  <span className="font-semibold text-white break-all">{STUDENT_INFO.email}</span>
                 </div>
               </div>
 
             </div>
           </div>
         </section>
+
+        {/* Récord Académico / Materias Clave */}
+        <Section
+          title="Récord Académico y Materias Núcleo"
+          subtitle="Desempeño sobresaliente comprobado en las materias fundamentales de ciencias de la computación"
+          centered
+          background="white"
+        >
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+            {HIGHLIGHTED_GRADES.map((item) => (
+              <div
+                key={item.id}
+                className="bg-gradient-to-b from-gray-50 to-white dark:from-gray-800 dark:to-gray-850 p-6 rounded-2xl border border-gray-200 dark:border-gray-700 shadow-sm hover:border-blue-300 dark:hover:border-blue-600 transition-all flex flex-col justify-between"
+              >
+                <div>
+                  <div className="flex items-center justify-between mb-3">
+                    <span className="text-[11px] font-mono font-bold text-gray-500 dark:text-gray-400 bg-gray-100 dark:bg-gray-700 px-2 py-0.5 rounded">
+                      {item.code}
+                    </span>
+                    <span className="inline-flex items-center gap-1 text-xs font-bold px-2.5 py-1 rounded-full bg-blue-100 text-blue-700 dark:bg-blue-900/60 dark:text-blue-300">
+                      <Star size={12} className="fill-current text-blue-600 dark:text-blue-400" />
+                      {item.badge}
+                    </span>
+                  </div>
+
+                  <h3 className="text-base font-bold text-gray-900 dark:text-white mb-2">
+                    {item.name}
+                  </h3>
+
+                  <p className="text-xs text-gray-600 dark:text-gray-300 leading-relaxed mb-4">
+                    {item.description}
+                  </p>
+                </div>
+
+                <div className="pt-3 border-t border-gray-100 dark:border-gray-700/60 flex items-center justify-between text-[11px] text-gray-500 dark:text-gray-400">
+                  <span>{item.period}</span>
+                  <span className="font-bold text-blue-600 dark:text-blue-400 text-xs">
+                    {item.grade} / {item.maxGrade} pts
+                  </span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </Section>
 
         {/* Logros y Liderazgo */}
         <Section
@@ -248,69 +299,99 @@ const AboutPage: React.FC = () => {
           </div>
         </Section>
 
-        {/* Educación y Certificaciones */}
+        {/* Educación y Diplomados UCAB */}
         <Section
-          title="Educación y Certificaciones"
-          subtitle="Base académica y certificaciones internacionales continuas"
+          title="Educación, Diplomados y Extensión UCAB"
+          subtitle="Formación universitaria continua en la Universidad Católica Andrés Bello"
           centered
           background="light"
         >
-          <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6">
             
             <div className="bg-white dark:bg-gray-800 p-6 rounded-2xl border border-gray-200 dark:border-gray-700">
               <div className="flex items-center gap-3 mb-4">
                 <GraduationCap className="w-6 h-6 text-blue-600 dark:text-blue-400" />
                 <h3 className="text-base font-bold text-gray-900 dark:text-white">
-                  Formación Universitaria
+                  Formación Académica Universitaria
                 </h3>
               </div>
-              <ul className="space-y-4 text-xs text-gray-700 dark:text-gray-300">
-                <div>
-                  <p className="font-bold text-gray-900 dark:text-white text-sm">
-                    Ingeniería Informática (En curso)
-                  </p>
-                  <p className="text-gray-500">Universidad Católica Andrés Bello (UCAB)</p>
-                  <p className="text-gray-500 mt-1">Enfoque en arquitectura de software, bases de datos y algoritmos.</p>
-                </div>
-                <div className="pt-2 border-t border-gray-100 dark:border-gray-700">
-                  <p className="font-bold text-gray-900 dark:text-white text-sm">
-                    Diplomado en Desarrollo Blockchain & Web3
-                  </p>
-                  <p className="text-gray-500">Universidad Católica Andrés Bello (UCAB)</p>
-                </div>
-              </ul>
+              
+              <div className="space-y-4">
+                {EDUCATION_PROGRAMS.map((edu, idx) => (
+                  <div 
+                    key={idx} 
+                    className={`p-4 rounded-xl border text-xs ${
+                      edu.highlight 
+                        ? 'bg-blue-50/50 dark:bg-blue-950/30 border-blue-200 dark:border-blue-800/50' 
+                        : 'bg-gray-50 dark:bg-gray-750 border-gray-200 dark:border-gray-700'
+                    }`}
+                  >
+                    <div className="flex items-center justify-between gap-2 mb-1">
+                      <span className="font-bold text-gray-900 dark:text-white text-sm">
+                        {edu.title}
+                      </span>
+                      {edu.highlight && (
+                        <span className="px-2 py-0.5 rounded-full text-[10px] font-semibold bg-blue-100 text-blue-700 dark:bg-blue-900 dark:text-blue-200">
+                          UCAB
+                        </span>
+                      )}
+                    </div>
+                    <p className="text-blue-600 dark:text-blue-400 font-medium mb-1">
+                      {edu.institution} — <span className="text-gray-500 dark:text-gray-400">{edu.school} ({edu.campus})</span>
+                    </p>
+                    <p className="text-emerald-600 dark:text-emerald-400 font-semibold mb-2">
+                      Status: {edu.status}
+                    </p>
+                    <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
+                      {edu.description}
+                    </p>
+                  </div>
+                ))}
+              </div>
             </div>
 
-            <div className="bg-white dark:bg-gray-800 p-6 rounded-2xl border border-gray-200 dark:border-gray-700">
-              <div className="flex items-center gap-3 mb-4">
-                <Award className="w-6 h-6 text-emerald-600 dark:text-emerald-400" />
-                <h3 className="text-base font-bold text-gray-900 dark:text-white">
-                  Certificaciones Oficiales
-                </h3>
+            <div className="bg-white dark:bg-gray-800 p-6 rounded-2xl border border-gray-200 dark:border-gray-700 flex flex-col justify-between">
+              <div>
+                <div className="flex items-center gap-3 mb-4">
+                  <Award className="w-6 h-6 text-emerald-600 dark:text-emerald-400" />
+                  <h3 className="text-base font-bold text-gray-900 dark:text-white">
+                    Certificaciones Internacionales
+                  </h3>
+                </div>
+                <ul className="space-y-4 text-xs text-gray-700 dark:text-gray-300">
+                  <li className="flex items-start gap-2.5">
+                    <CheckCircle2 size={16} className="text-emerald-500 flex-shrink-0 mt-0.5" />
+                    <div>
+                      <span className="font-semibold text-gray-900 dark:text-white text-sm">GitHub Foundations</span>
+                      <p className="text-xs text-gray-500 mt-0.5">Certificación oficial en flujos de trabajo profesionales de Git y GitHub.</p>
+                    </div>
+                  </li>
+                  <li className="flex items-start gap-2.5">
+                    <CheckCircle2 size={16} className="text-emerald-500 flex-shrink-0 mt-0.5" />
+                    <div>
+                      <span className="font-semibold text-gray-900 dark:text-white text-sm">Generative AI Foundations</span>
+                      <p className="text-xs text-gray-500 mt-0.5">Amazon Web Services (AWS) — Fundamentos y modelos generativos.</p>
+                    </div>
+                  </li>
+                  <li className="flex items-start gap-2.5">
+                    <CheckCircle2 size={16} className="text-emerald-500 flex-shrink-0 mt-0.5" />
+                    <div>
+                      <span className="font-semibold text-gray-900 dark:text-white text-sm">C/C++ & Java Fundamentals</span>
+                      <p className="text-xs text-gray-500 mt-0.5">Certificaciones técnicas de fundamentos en Platzi y Udemy.</p>
+                    </div>
+                  </li>
+                </ul>
               </div>
-              <ul className="space-y-3 text-xs text-gray-700 dark:text-gray-300">
-                <li className="flex items-start gap-2">
-                  <CheckCircle2 size={16} className="text-emerald-500 flex-shrink-0 mt-0.5" />
-                  <div>
-                    <span className="font-semibold text-gray-900 dark:text-white">GitHub Foundations</span>
-                    <p className="text-[11px] text-gray-500">Certificación oficial en flujos de trabajo de Git y GitHub.</p>
-                  </div>
-                </li>
-                <li className="flex items-start gap-2">
-                  <CheckCircle2 size={16} className="text-emerald-500 flex-shrink-0 mt-0.5" />
-                  <div>
-                    <span className="font-semibold text-gray-900 dark:text-white">Generative AI Foundations</span>
-                    <p className="text-[11px] text-gray-500">Amazon Web Services (AWS).</p>
-                  </div>
-                </li>
-                <li className="flex items-start gap-2">
-                  <CheckCircle2 size={16} className="text-emerald-500 flex-shrink-0 mt-0.5" />
-                  <div>
-                    <span className="font-semibold text-gray-900 dark:text-white">C/C++ & Java Fundamentals</span>
-                    <p className="text-[11px] text-gray-500">Certificaciones técnicas en Platzi y Udemy.</p>
-                  </div>
-                </li>
-              </ul>
+
+              <div className="mt-6 pt-4 border-t border-gray-100 dark:border-gray-700 bg-emerald-50/50 dark:bg-emerald-950/20 p-4 rounded-xl border border-emerald-200 dark:border-emerald-900/40">
+                <div className="flex items-center gap-2 text-emerald-700 dark:text-emerald-300 font-bold text-xs mb-1">
+                  <Sparkles size={14} />
+                  Compromiso Pedagógico
+                </div>
+                <p className="text-xs text-gray-600 dark:text-gray-300 leading-relaxed">
+                  En mis tutorías combino la exigencia metodológica de la UCAB con casos prácticos reales para asegurar que domines la lógica y los parciales sin memorizar soluciones.
+                </p>
+              </div>
             </div>
 
           </div>
