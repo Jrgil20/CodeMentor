@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { ExternalLink } from 'lucide-react';
+import { ExternalLink, Github, Globe } from 'lucide-react';
 import { projects } from '../../data/projects';
 import Button from '../common/Button';
 
@@ -98,16 +98,39 @@ const FeaturedProjects: React.FC = () => {
                 </div>
               </div>
 
-              <div className="p-6 pt-0 border-t border-gray-100 dark:border-gray-700/60 mt-auto">
+              <div className="p-6 pt-0 border-t border-gray-100 dark:border-gray-700/60 mt-auto flex flex-wrap items-center gap-4">
                 <a
                   href={project.link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center text-xs font-semibold text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 transition-colors"
+                  className="inline-flex items-center text-xs font-semibold text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 transition-colors gap-1"
                 >
-                  Ver repositorio en GitHub
-                  <ExternalLink size={13} className="ml-1" />
+                  {project.link.includes('github.com') ? (
+                    <>
+                      <Github size={14} />
+                      <span>Ver repositorio en GitHub</span>
+                    </>
+                  ) : (
+                    <>
+                      <Globe size={14} />
+                      <span>Abrir aplicación web</span>
+                    </>
+                  )}
+                  <ExternalLink size={12} />
                 </a>
+
+                {project.githubLink && (
+                  <a
+                    href={project.githubLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center text-xs font-semibold text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors gap-1"
+                  >
+                    <Github size={14} />
+                    <span>Ver código en GitHub</span>
+                    <ExternalLink size={12} />
+                  </a>
+                )}
               </div>
             </motion.div>
           ))}

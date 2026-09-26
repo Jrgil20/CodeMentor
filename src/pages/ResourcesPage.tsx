@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
-import { Search, ExternalLink } from 'lucide-react';
+import { Search, ExternalLink, Github, Globe } from 'lucide-react';
 import { resources } from '../data/resources';
 import Section from '../components/common/Section';
 import { ResourceTag } from '../types';
@@ -135,16 +135,43 @@ const ResourcesPage: React.FC = () => {
                   </div>
                 </div>
 
-                <div className="p-6 pt-0 border-t border-gray-100 dark:border-gray-700/60 mt-auto">
+                <div className="p-6 pt-0 border-t border-gray-100 dark:border-gray-700/60 mt-auto flex flex-col gap-2">
                   <a
                     href={resource.link}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center justify-center gap-2 w-full text-xs font-semibold py-2 px-3 rounded-lg bg-gray-100 dark:bg-gray-700/80 hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-900 dark:text-white transition-colors"
+                    className={`inline-flex items-center justify-center gap-2 w-full text-xs font-semibold py-2 px-3 rounded-lg transition-colors ${
+                      resource.link.includes('github.com')
+                        ? 'bg-gray-100 dark:bg-gray-700/80 hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-900 dark:text-white'
+                        : 'bg-blue-600 hover:bg-blue-700 text-white shadow-sm'
+                    }`}
                   >
-                    <span>Ver en GitHub</span>
-                    <ExternalLink size={13} />
+                    {resource.link.includes('github.com') ? (
+                      <>
+                        <Github size={14} />
+                        <span>Ver en GitHub</span>
+                      </>
+                    ) : (
+                      <>
+                        <Globe size={14} />
+                        <span>Abrir Aplicación Web</span>
+                      </>
+                    )}
+                    <ExternalLink size={12} className="ml-0.5" />
                   </a>
+
+                  {resource.githubLink && (
+                    <a
+                      href={resource.githubLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center justify-center gap-2 w-full text-xs font-semibold py-2 px-3 rounded-lg bg-gray-100 dark:bg-gray-700/80 hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-900 dark:text-white transition-colors border border-gray-200 dark:border-gray-600"
+                    >
+                      <Github size={14} />
+                      <span>Ver Código en GitHub</span>
+                      <ExternalLink size={12} className="ml-0.5" />
+                    </a>
+                  )}
                 </div>
               </div>
             ))}
