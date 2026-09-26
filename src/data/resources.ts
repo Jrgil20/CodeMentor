@@ -20,8 +20,7 @@ export const resources: Resource[] = [
     tag: "herramienta",
     type: "tool",
     link: "https://jrgil20.github.io/PerspectivaHoraria/",
-    image: "https://images.unsplash.com/photo-1506784983877-45594efa4cbe?auto=format&fit=crop&w=600&q=80",
-    pinned: true
+    image: "https://images.unsplash.com/photo-1506784983877-45594efa4cbe?auto=format&fit=crop&w=600&q=80"
   },
   {
     id: 3,
@@ -43,8 +42,7 @@ export const resources: Resource[] = [
     tag: "herramienta",
     type: "tool",
     link: "https://www.cs.usfca.edu/~galles/visualization/Algorithms.html",
-    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=600&q=80",
-    pinned: true
+    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=600&q=80"
   },
   {
     id: 5,

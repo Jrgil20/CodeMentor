@@ -8,7 +8,6 @@ export const projects: Project[] = [
     tags: ["Herramienta Web", "UCAB", "Planificación", "Productividad"],
     image: "https://images.unsplash.com/photo-1506784983877-45594efa4cbe?auto=format&fit=crop&w=600&q=80",
     link: "https://jrgil20.github.io/PerspectivaHoraria/",
-    pinned: true,
     tag: "herramienta"
   },
   {
