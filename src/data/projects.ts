@@ -27,7 +27,8 @@ export const projects: Project[] = [
     description: "Herramienta especializada para el seguimiento, gestión y cálculo ponderado de notas académicas universitarias.",
     tags: ["Herramienta", "Académico", "Productividad"],
     image: "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&w=600&q=80",
-    link: "https://github.com/Jrgil20/gapto10-cfpp",
+    link: "https://jrgil20.github.io/gapto10-cfpp/",
+    githubLink: "https://github.com/Jrgil20/gapto10-cfpp",
     pinned: true,
     tag: "herramienta"
   },

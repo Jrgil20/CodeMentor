@@ -30,7 +30,8 @@ export const resources: Resource[] = [
     category: "Herramientas",
     tag: "herramienta",
     type: "tool",
-    link: "https://github.com/Jrgil20/gapto10-cfpp",
+    link: "https://jrgil20.github.io/gapto10-cfpp/",
+    githubLink: "https://github.com/Jrgil20/gapto10-cfpp",
     image: "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&w=600&q=80",
     pinned: true
   },

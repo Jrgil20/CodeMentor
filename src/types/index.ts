@@ -21,6 +21,7 @@ export interface Project {
   tags: string[];
   image: string;
   link: string;
+  githubLink?: string;
   pinned?: boolean;
   tag?: ResourceTag;
 }
@@ -45,6 +46,7 @@ export interface Resource {
   tag: ResourceTag;
   type: 'video' | 'article' | 'tutorial' | 'tool';
   link: string;
+  githubLink?: string;
   image: string;
   pinned?: boolean;
 }
