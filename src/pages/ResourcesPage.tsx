@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
-import { Search, ExternalLink, Github, Globe } from 'lucide-react';
+import { Search, ExternalLink, Github, Code2 } from 'lucide-react';
 import { resources } from '../data/resources';
 import Section from '../components/common/Section';
 import { ResourceTag } from '../types';
@@ -153,7 +153,7 @@ const ResourcesPage: React.FC = () => {
                       </>
                     ) : (
                       <>
-                        <Globe size={14} />
+                        <Code2 size={14} />
                         <span>Abrir Aplicación Web</span>
                       </>
                     )}

@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { ExternalLink, Github, Globe } from 'lucide-react';
+import { ExternalLink, Github, Code2 } from 'lucide-react';
 import { projects } from '../../data/projects';
 import Button from '../common/Button';
 
@@ -112,7 +112,7 @@ const FeaturedProjects: React.FC = () => {
                     </>
                   ) : (
                     <>
-                      <Globe size={14} />
+                      <Code2 size={14} />
                       <span>Abrir aplicación web</span>
                     </>
                   )}

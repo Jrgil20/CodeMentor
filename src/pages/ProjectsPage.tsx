@@ -1,6 +1,6 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
-import { ExternalLink, Github, Globe } from 'lucide-react';
+import { ExternalLink, Github, Code2 } from 'lucide-react';
 import { projects } from '../data/projects';
 import Section from '../components/common/Section';
 import Button from '../components/common/Button';
@@ -89,7 +89,7 @@ const ProjectsPage: React.FC = () => {
                       </>
                     ) : (
                       <>
-                        <Globe size={14} />
+                        <Code2 size={14} />
                         <span>Abrir Aplicación Web</span>
                       </>
                     )}
