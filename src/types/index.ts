@@ -87,11 +87,14 @@ export interface Subject {
   topics: string[];
 }
 
+export interface QuestionOption {
+  text: string;
+  value: number;
+  key?: string;
+}
+
 export interface Question {
   id: number;
   question: string;
-  options: {
-    text: string;
-    value: number;
-  }[];
+  options: QuestionOption[];
 }

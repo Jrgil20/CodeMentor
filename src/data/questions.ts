@@ -3,52 +3,48 @@ import { Question } from '../types';
 export const questions: Question[] = [
   {
     id: 1,
-    question: "¿Cuál es tu nivel de experiencia en programación?",
+    question: "¿Es tu primera vez cursando la materia o la estás repitiendo?",
     options: [
-      { text: "Nunca he programado", value: 0 },
-      { text: "He realizado tutoriales básicos", value: 1 },
-      { text: "He desarrollado pequeños proyectos personales", value: 2 },
-      { text: "He trabajado en proyectos profesionales", value: 3 }
+      { text: "Es mi primera vez cursando la materia", value: 1, key: "first_time" },
+      { text: "Ya la cursé antes / La estoy repitiendo", value: 2, key: "repeating" },
+      { text: "Aún no la he cursado, quiero adelantar contenidos", value: 1, key: "first_time" }
     ]
   },
   {
     id: 2,
-    question: "¿Qué lenguajes de programación conoces?",
+    question: "¿En qué área sientes que tienes mayor dificultad o desafío?",
     options: [
-      { text: "Ninguno", value: 0 },
-      { text: "HTML/CSS (básicos web)", value: 1 },
-      { text: "JavaScript o Python básico", value: 2 },
-      { text: "Varios lenguajes con buen nivel", value: 3 }
+      { text: "Principalmente en la teoría y conceptos abstractos", value: 2, key: "theory" },
+      { text: "Principalmente en la práctica, lógica de código y ejercicios", value: 3, key: "practice" },
+      { text: "Tengo dificultades tanto en la teoría como en la práctica", value: 4, key: "both" },
+      { text: "No tengo dificultades graves, me siento cómodo aprendiendo a mi ritmo", value: 1, key: "none" }
     ]
   },
   {
     id: 3,
-    question: "¿Cuántas horas semanales puedes dedicar a estudiar?",
+    question: "¿Perteneces a la UCAB (Universidad Católica Andrés Bello) o a otra institución?",
     options: [
-      { text: "Menos de 5 horas", value: 1 },
-      { text: "Entre 5 y 10 horas", value: 2 },
-      { text: "Entre 10 y 20 horas", value: 3 },
-      { text: "Más de 20 horas", value: 4 }
+      { text: "Soy estudiante de la UCAB", value: 2, key: "ucab" },
+      { text: "Soy estudiante de otra universidad o instituto", value: 2, key: "other_univ" },
+      { text: "Aprendo de manera autodidacta / No estoy en universidad", value: 1, key: "self_taught" }
     ]
   },
   {
     id: 4,
-    question: "¿Cuál es tu objetivo principal al aprender programación?",
+    question: "¿Cómo prefieres llevar tu proceso de estudio actualmente?",
     options: [
-      { text: "Curiosidad personal", value: 1 },
-      { text: "Complementar mi perfil profesional actual", value: 2 },
-      { text: "Cambiar de carrera a desarrollo de software", value: 3 },
-      { text: "Crear mi propio proyecto o startup tecnológico", value: 3 }
+      { text: "Estudio en solitario aprovechando guías, lecturas y videos explicativos", value: 1, key: "autonomous" },
+      { text: "Prefiero un tutor que me oriente paso a paso y resuelva mis dudas directas", value: 3, key: "guided" },
+      { text: "Una combinación de autoestudio con soporte puntual cuando me trabo", value: 2, key: "hybrid" }
     ]
   },
   {
     id: 5,
-    question: "¿Has intentado aprender programación anteriormente?",
+    question: "¿Qué tipo de apoyo inmediato buscas para tu situación actual?",
     options: [
-      { text: "No, es mi primer intento", value: 1 },
-      { text: "Sí, pero abandoné al poco tiempo", value: 2 },
-      { text: "Sí, he completado algunos cursos o tutoriales", value: 3 },
-      { text: "Sí, tengo una base sólida", value: 4 }
+      { text: "Recursos y guías de libre acceso para aprender a mi propio ritmo", value: 1, key: "resources" },
+      { text: "Una clase de asesoría gratuita para organizar mi plan de estudio e independizarme", value: 3, key: "advisory" },
+      { text: "Preparación intensiva para parciales, proyectos y entregas específicas", value: 4, key: "intensive" }
     ]
   }
 ];

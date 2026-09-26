@@ -1,20 +1,21 @@
 import React, { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { motion } from 'framer-motion';
-import { ArrowRight, CheckCircle, HelpCircle } from 'lucide-react';
+import { ArrowRight, CheckCircle, HelpCircle, BookOpen, Calendar, Sparkles, UserCheck } from 'lucide-react';
 import { questions } from '../data/questions';
 import Section from '../components/common/Section';
 import Button from '../components/common/Button';
 
 const SelfAssessmentPage: React.FC = () => {
   const [currentStep, setCurrentStep] = useState(0);
-  const [answers, setAnswers] = useState<number[]>([]);
+  const [selectedKeys, setSelectedKeys] = useState<string[]>([]);
   const [showResult, setShowResult] = useState(false);
 
-  const handleAnswerSelect = (value: number) => {
-    const newAnswers = [...answers];
-    newAnswers[currentStep] = value;
-    setAnswers(newAnswers);
+  const handleAnswerSelect = (key?: string) => {
+    if (!key) return;
+    const newKeys = [...selectedKeys];
+    newKeys[currentStep] = key;
+    setSelectedKeys(newKeys);
   };
 
   const handleNext = () => {
@@ -32,55 +33,34 @@ const SelfAssessmentPage: React.FC = () => {
   };
 
   const handleRestart = () => {
-    setAnswers([]);
+    setSelectedKeys([]);
     setCurrentStep(0);
     setShowResult(false);
   };
 
-  const calculateScore = () => {
-    return answers.reduce((total, current) => total + current, 0);
-  };
+  // Diagnosis logic
+  const isFirstTime = selectedKeys[0] === 'first_time';
+  const isRepeating = selectedKeys[0] === 'repeating';
+  const hasPracticeDiff = selectedKeys[1] === 'practice' || selectedKeys[1] === 'both';
+  const prefersAutonomous = selectedKeys[3] === 'autonomous' || selectedKeys[4] === 'resources';
 
-  const getRecommendation = () => {
-    const score = calculateScore();
-    const maxScore = questions.length * 4; // Assuming max value per question is 4
-    const percentage = (score / maxScore) * 100;
-
-    if (percentage < 30) {
-      return {
-        title: 'Programa de Fundamentos',
-        description: 'Te recomendamos empezar con nuestro programa de fundamentos de programación, diseñado para principiantes absolutos o aquellos con conocimientos muy básicos.',
-        course: 'Fundamentos de Programación',
-        next: 'Agendar una sesión introductoria gratuita para discutir tus objetivos y crear un plan personalizado.'
-      };
-    } else if (percentage < 60) {
-      return {
-        title: 'Programa Intermedio',
-        description: 'Ya tienes algunos conocimientos, pero te beneficiarías de nuestro programa intermedio para consolidar tu base y avanzar hacia conceptos más complejos.',
-        course: 'Desarrollo Web Full Stack',
-        next: 'Solicitar una evaluación técnica personalizada para identificar áreas específicas a trabajar.'
-      };
-    } else {
-      return {
-        title: 'Programa Avanzado',
-        description: 'Tienes una base sólida. Te recomendamos nuestro programa avanzado, enfocado en algoritmos complejos, patrones de diseño y preparación para entrevistas técnicas.',
-        course: 'Algoritmos Avanzados y Preparación para Entrevistas',
-        next: 'Agendar una sesión para discutir objetivos específicos y crear un plan de estudio avanzado.'
-      };
-    }
-  };
+  // Recommend self-study for first-time learners who prefer autonomous learning and don't have urgent practice blocks
+  const isSelfStudyRecommended = isFirstTime && !isRepeating && !hasPracticeDiff && prefersAutonomous;
 
   return (
     <>
       <Helmet>
         <title>Autoevaluación | CodeMentor</title>
-        <meta name="description" content="Realiza esta autoevaluación para determinar tu nivel actual en programación y recibir recomendaciones personalizadas para tu formación." />
+        <meta
+          name="description"
+          content="Realiza nuestra autoevaluación guiada para descubrir la mejor ruta de estudio: autoaprendizaje en solitario con recursos o una clase de asesoría gratuita personalizada."
+        />
       </Helmet>
 
       <div className="pt-20">
         <Section
-          title="Autoevaluación"
-          subtitle="Responde estas preguntas para ayudarnos a entender tu nivel y ofrecerte el programa más adecuado"
+          title="Autoevaluación de Estudio"
+          subtitle="Responde estas breves preguntas para recomendarte la mejor ruta: aprendizaje autónomo con recursos o una clase de asesoría gratuita de orientación."
           centered
           background="light"
         >
@@ -88,7 +68,7 @@ const SelfAssessmentPage: React.FC = () => {
             <div className="max-w-2xl mx-auto">
               <div className="mb-8">
                 <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5">
-                  <div 
+                  <div
                     className="bg-blue-600 h-2.5 rounded-full transition-all duration-300"
                     style={{ width: `${((currentStep + 1) / questions.length) * 100}%` }}
                   ></div>
@@ -110,36 +90,43 @@ const SelfAssessmentPage: React.FC = () => {
                   <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4">
                     {questions[currentStep].question}
                   </h3>
-                  
+
                   <div className="space-y-3">
-                    {questions[currentStep].options.map((option, index) => (
-                      <div 
-                        key={index}
-                        onClick={() => handleAnswerSelect(option.value)}
-                        className={`p-4 rounded-lg cursor-pointer transition-all ${
-                          answers[currentStep] === option.value
-                            ? 'bg-blue-50 dark:bg-blue-900/30 border-2 border-blue-500 dark:border-blue-400'
-                            : 'bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 hover:bg-gray-100 dark:hover:bg-gray-600'
-                        }`}
-                      >
-                        <div className="flex items-center">
-                          <div className={`w-5 h-5 mr-3 rounded-full border flex items-center justify-center ${
-                            answers[currentStep] === option.value
-                              ? 'border-blue-500 bg-blue-500 dark:border-blue-400 dark:bg-blue-400'
-                              : 'border-gray-300 dark:border-gray-500'
-                          }`}>
-                            {answers[currentStep] === option.value && (
-                              <div className="w-2 h-2 rounded-full bg-white"></div>
-                            )}
+                    {questions[currentStep].options.map((option, index) => {
+                      const isSelected = selectedKeys[currentStep] === option.key;
+                      return (
+                        <div
+                          key={index}
+                          onClick={() => handleAnswerSelect(option.key)}
+                          className={`p-4 rounded-lg cursor-pointer transition-all ${
+                            isSelected
+                              ? 'bg-blue-50 dark:bg-blue-900/30 border-2 border-blue-500 dark:border-blue-400 shadow-sm'
+                              : 'bg-gray-50 dark:bg-gray-700/60 border border-gray-200 dark:border-gray-600 hover:bg-gray-100 dark:hover:bg-gray-600'
+                          }`}
+                        >
+                          <div className="flex items-center">
+                            <div
+                              className={`w-5 h-5 mr-3 rounded-full border flex items-center justify-center transition-colors ${
+                                isSelected
+                                  ? 'border-blue-500 bg-blue-500 dark:border-blue-400 dark:bg-blue-400'
+                                  : 'border-gray-300 dark:border-gray-500'
+                              }`}
+                            >
+                              {isSelected && <div className="w-2 h-2 rounded-full bg-white"></div>}
+                            </div>
+                            <span
+                              className={`${
+                                isSelected
+                                  ? 'text-gray-900 dark:text-white font-medium'
+                                  : 'text-gray-700 dark:text-gray-300'
+                              }`}
+                            >
+                              {option.text}
+                            </span>
                           </div>
-                          <span className={`${
-                            answers[currentStep] === option.value
-                              ? 'text-gray-900 dark:text-white font-medium'
-                              : 'text-gray-700 dark:text-gray-300'
-                          }`}>{option.text}</span>
                         </div>
-                      </div>
-                    ))}
+                      );
+                    })}
                   </div>
                 </div>
 
@@ -155,12 +142,12 @@ const SelfAssessmentPage: React.FC = () => {
                   >
                     Anterior
                   </button>
-                  
+
                   <button
                     onClick={handleNext}
-                    disabled={answers[currentStep] === undefined}
+                    disabled={selectedKeys[currentStep] === undefined}
                     className={`px-4 py-2 rounded-md text-sm font-medium flex items-center ${
-                      answers[currentStep] === undefined
+                      selectedKeys[currentStep] === undefined
                         ? 'bg-gray-100 dark:bg-gray-800 text-gray-400 dark:text-gray-600 cursor-not-allowed'
                         : 'bg-blue-600 text-white hover:bg-blue-700'
                     }`}
@@ -176,60 +163,152 @@ const SelfAssessmentPage: React.FC = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
-              className="max-w-3xl mx-auto"
+              className="max-w-4xl mx-auto"
             >
               <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden border border-gray-200 dark:border-gray-700">
-                <div className="bg-gradient-to-r from-blue-600 to-purple-600 p-6">
-                  <h3 className="text-2xl font-bold text-white mb-2">
-                    Tu Evaluación
+                <div className="bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 p-6 md:p-8 text-white">
+                  <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-white/20 backdrop-blur-sm text-white mb-3">
+                    <Sparkles size={14} className="mr-1.5" />
+                    Diagnóstico Completado
+                  </span>
+                  <h3 className="text-2xl md:text-3xl font-bold mb-2">
+                    Tu Plan de Estudio Personalizado
                   </h3>
-                  <p className="text-blue-100">
-                    Basado en tus respuestas, hemos preparado las siguientes recomendaciones
+                  <p className="text-blue-100 max-w-2xl text-sm md:text-base">
+                    Analizamos tu situación actual. A continuación te presentamos las dos alternativas diseñadas para ti: aprender de forma autónoma con nuestros recursos o agendar una clase de asesoría gratuita.
                   </p>
                 </div>
-                
-                <div className="p-6">
-                  <div className="mb-6">
-                    <h4 className="text-xl font-bold text-gray-900 dark:text-white mb-4 flex items-center">
-                      <CheckCircle size={24} className="text-green-500 mr-2" />
-                      {getRecommendation().title}
-                    </h4>
-                    <p className="text-gray-700 dark:text-gray-300 mb-4">
-                      {getRecommendation().description}
-                    </p>
-                    
-                    <div className="bg-blue-50 dark:bg-blue-900/20 p-4 rounded-lg border border-blue-100 dark:border-blue-800 mb-6">
-                      <h5 className="font-semibold text-gray-900 dark:text-white mb-2">
-                        Curso recomendado:
-                      </h5>
-                      <p className="text-gray-700 dark:text-gray-300">
-                        {getRecommendation().course}
-                      </p>
-                    </div>
-                    
-                    <h5 className="font-semibold text-gray-900 dark:text-white mb-2">
-                      Próximos pasos:
-                    </h5>
-                    <p className="text-gray-700 dark:text-gray-300 mb-4">
-                      {getRecommendation().next}
-                    </p>
-                    
-                    <div className="flex flex-col sm:flex-row sm:justify-between gap-4 mt-8">
+
+                <div className="p-6 md:p-8">
+                  <div className="grid md:grid-cols-2 gap-6 mb-8">
+                    {/* Tarjeta 1: Aprender en solitario */}
+                    <div
+                      className={`relative flex flex-col justify-between p-6 rounded-xl border transition-all ${
+                        isSelfStudyRecommended
+                          ? 'border-blue-500 dark:border-blue-400 bg-blue-50/40 dark:bg-blue-900/20 ring-2 ring-blue-500/20 shadow-md'
+                          : 'border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800/80 hover:border-gray-300 dark:hover:border-gray-600'
+                      }`}
+                    >
+                      {isSelfStudyRecommended && (
+                        <div className="absolute -top-3 left-4 bg-blue-600 text-white text-xs font-bold px-3 py-1 rounded-full shadow-sm">
+                          Opción Recomendada
+                        </div>
+                      )}
+
+                      <div>
+                        <div className="flex items-center mb-4">
+                          <div className="w-10 h-10 rounded-lg bg-blue-100 dark:bg-blue-900/50 text-blue-600 dark:text-blue-400 flex items-center justify-center mr-3">
+                            <BookOpen size={22} />
+                          </div>
+                          <div>
+                            <h4 className="text-lg font-bold text-gray-900 dark:text-white">
+                              Aprender en Solitario
+                            </h4>
+                            <span className="text-xs text-blue-600 dark:text-blue-400 font-medium">
+                              Ruta con Recursos Gratuitos
+                            </span>
+                          </div>
+                        </div>
+
+                        <p className="text-gray-600 dark:text-gray-300 text-sm mb-4">
+                          Ideal si estás viendo la materia por primera vez y prefieres estudiar a tu propio ritmo explorando material organizado por temas.
+                        </p>
+
+                        <ul className="space-y-2 mb-6 text-sm text-gray-700 dark:text-gray-300">
+                          <li className="flex items-start">
+                            <CheckCircle size={16} className="text-green-500 mr-2 mt-0.5 shrink-0" />
+                            <span>Acceso a guías teóricas y ejercicios resueltos.</span>
+                          </li>
+                          <li className="flex items-start">
+                            <CheckCircle size={16} className="text-green-500 mr-2 mt-0.5 shrink-0" />
+                            <span>Videos y documentación seleccionada.</span>
+                          </li>
+                          <li className="flex items-start">
+                            <CheckCircle size={16} className="text-green-500 mr-2 mt-0.5 shrink-0" />
+                            <span>Estudia a tu propio ritmo sin horarios.</span>
+                          </li>
+                        </ul>
+                      </div>
+
                       <Button
-                        onClick={handleRestart}
-                        variant="outline"
+                        to="/recursos"
+                        variant={isSelfStudyRecommended ? 'primary' : 'outline'}
+                        className="w-full justify-center"
                       >
-                        <HelpCircle size={18} className="mr-2" />
-                        Volver a realizar la evaluación
+                        <BookOpen size={18} className="mr-2" />
+                        Explorar Recursos Gratis
                       </Button>
-                      
+                    </div>
+
+                    {/* Tarjeta 2: Clase de Asesoría Gratuita */}
+                    <div
+                      className={`relative flex flex-col justify-between p-6 rounded-xl border transition-all ${
+                        !isSelfStudyRecommended
+                          ? 'border-purple-500 dark:border-purple-400 bg-purple-50/40 dark:bg-purple-900/20 ring-2 ring-purple-500/20 shadow-md'
+                          : 'border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800/80 hover:border-gray-300 dark:hover:border-gray-600'
+                      }`}
+                    >
+                      {!isSelfStudyRecommended && (
+                        <div className="absolute -top-3 left-4 bg-purple-600 text-white text-xs font-bold px-3 py-1 rounded-full shadow-sm">
+                          Opción Recomendada
+                        </div>
+                      )}
+
+                      <div>
+                        <div className="flex items-center mb-4">
+                          <div className="w-10 h-10 rounded-lg bg-purple-100 dark:bg-purple-900/50 text-purple-600 dark:text-purple-400 flex items-center justify-center mr-3">
+                            <UserCheck size={22} />
+                          </div>
+                          <div>
+                            <h4 className="text-lg font-bold text-gray-900 dark:text-white">
+                              Clase de Asesoría Gratuita
+                            </h4>
+                            <span className="text-xs text-purple-600 dark:text-purple-400 font-medium">
+                              Guianza 1 a 1 y Diagnóstico
+                            </span>
+                          </div>
+                        </div>
+
+                        <p className="text-gray-600 dark:text-gray-300 text-sm mb-4">
+                          Recomendada especialmente si estás repitiendo la materia, tienes dudas prácticas/teóricas específicas o necesitas un plan guiado.
+                        </p>
+
+                        <ul className="space-y-2 mb-6 text-sm text-gray-700 dark:text-gray-300">
+                          <li className="flex items-start">
+                            <CheckCircle size={16} className="text-purple-500 mr-2 mt-0.5 shrink-0" />
+                            <span>Sesión gratuita personalizada con un tutor.</span>
+                          </li>
+                          <li className="flex items-start">
+                            <CheckCircle size={16} className="text-purple-500 mr-2 mt-0.5 shrink-0" />
+                            <span>Revisión de trabas en código, lógica o teoría.</span>
+                          </li>
+                          <li className="flex items-start">
+                            <CheckCircle size={16} className="text-purple-500 mr-2 mt-0.5 shrink-0" />
+                            <span>Diseño de plan para continuar tu estudio autónomo.</span>
+                          </li>
+                        </ul>
+                      </div>
+
                       <Button
                         to="/contacto"
-                        variant="primary"
+                        variant={!isSelfStudyRecommended ? 'primary' : 'outline'}
+                        className="w-full justify-center"
                       >
-                        Contactar para más información
+                        <Calendar size={18} className="mr-2" />
+                        Solicitar Asesoría Gratuita
                       </Button>
                     </div>
+                  </div>
+
+                  <div className="flex justify-center pt-4 border-t border-gray-200 dark:border-gray-700">
+                    <Button
+                      onClick={handleRestart}
+                      variant="outline"
+                      size="sm"
+                    >
+                      <HelpCircle size={16} className="mr-2" />
+                      Volver a realizar la evaluación
+                    </Button>
                   </div>
                 </div>
               </div>
