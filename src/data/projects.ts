@@ -56,6 +56,18 @@ export const projects: Project[] = [
     tags: ["Worker", "Audio", "Backend", "Automatización"],
     image: "https://images.unsplash.com/photo-1589254065878-42c9da997008?auto=format&fit=crop&w=600&q=80",
     link: "https://github.com/Jrgil20/class-transcription-worker",
+    tag: ["herramienta", "proyecto"]
+  },
+  {
+    id: 11,
+    title: "Arrow Maze — Escape Puzzle (Clon Funcional)",
+    description: "Diseño e implementación integral de un clon de Arrow Maze bajo Specification-Driven Development (SDD) con especificaciones en Gherkin (BDD) y ADRs. Arquitectura Clean con Domain-Driven Design (DDD), tablero modelado como grafo pasivo, evaluación de rutas, principios SOLID y patrones GoF (Factory, Adapter, State, Strategy, Command).",
+    tags: ["React 18", "TypeScript", "Node.js", "PostgreSQL", "SDD / BDD", "Clean Architecture", "DDD"],
+    image: "https://images.unsplash.com/photo-1509228468518-180dd4864904?auto=format&fit=crop&w=600&q=80",
+    link: "https://arrowmazegame.netlify.app",
+    docLink: "https://nrc25783-g4-arrowmaze.github.io/arrowmaze-project-core/",
+    githubLink: "https://github.com/NRC25783-G4-ArrowMaze",
+    pinned: true,
     tag: "proyecto"
   },
   {

@@ -100,7 +100,7 @@ export const resources: Resource[] = [
     title: "Worker de Transcripción Automatizada de Clases",
     description: "Servicio worker en segundo plano para la ingesta, transcripción automatizada y procesamiento de audio/clases.",
     category: "Desarrollo Backend",
-    tag: "proyecto",
+    tag: ["herramienta", "proyecto"],
     type: "project",
     link: "https://github.com/Jrgil20/class-transcription-worker",
     image: "https://images.unsplash.com/photo-1589254065878-42c9da997008?auto=format&fit=crop&w=600&q=80"

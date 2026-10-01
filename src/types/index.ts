@@ -22,8 +22,9 @@ export interface Project {
   image: string;
   link: string;
   githubLink?: string;
+  docLink?: string;
   pinned?: boolean;
-  tag?: ResourceTag;
+  tag?: ResourceTag | ResourceTag[];
 }
 
 export interface BlogPost {
@@ -43,10 +44,11 @@ export interface Resource {
   title: string;
   description: string;
   category: string;
-  tag: ResourceTag;
-  type: 'video' | 'article' | 'tutorial' | 'tool';
+  tag: ResourceTag | ResourceTag[];
+  type: 'video' | 'article' | 'tutorial' | 'tool' | 'project' | 'lab';
   link: string;
   githubLink?: string;
+  docLink?: string;
   image: string;
   pinned?: boolean;
 }

@@ -1,9 +1,15 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
-import { ExternalLink, Github, Code2 } from 'lucide-react';
+import { ExternalLink, Github, Code2, BookOpen } from 'lucide-react';
 import { projects } from '../data/projects';
 import Section from '../components/common/Section';
 import Button from '../components/common/Button';
+import { ResourceTag } from '../types';
+
+const getProjectTags = (tag?: ResourceTag | ResourceTag[]): ResourceTag[] => {
+  if (!tag) return [];
+  return Array.isArray(tag) ? tag : [tag];
+};
 
 const ProjectsPage: React.FC = () => {
   return (
@@ -42,10 +48,21 @@ const ProjectsPage: React.FC = () => {
                         PINNED
                       </span>
                     )}
-                    {project.tag && (
-                      <span className="absolute bottom-3 left-3 bg-black/75 backdrop-blur-sm text-white text-[11px] font-mono px-2 py-0.5 rounded">
-                        [{project.tag}]
-                      </span>
+                    {getProjectTags(project.tag).length > 0 && (
+                      <div className="absolute bottom-3 left-3 flex flex-wrap gap-1">
+                        {getProjectTags(project.tag).map((tag, idx) => (
+                          <span
+                            key={tag}
+                            className={`backdrop-blur-sm text-[11px] font-mono px-2 py-0.5 rounded ${
+                              idx === 0
+                                ? 'bg-black/80 text-white font-semibold'
+                                : 'bg-black/60 text-gray-300'
+                            }`}
+                          >
+                            [{tag}]
+                          </span>
+                        ))}
+                      </div>
                     )}
                   </div>
                   
@@ -96,17 +113,45 @@ const ProjectsPage: React.FC = () => {
                     <ExternalLink size={12} className="ml-0.5" />
                   </a>
 
-                  {project.githubLink && (
-                    <a
-                      href={project.githubLink}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center justify-center gap-2 w-full text-xs font-semibold py-2 px-3 rounded-lg bg-gray-100 dark:bg-gray-700/80 hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-900 dark:text-white transition-colors border border-gray-200 dark:border-gray-600"
-                    >
-                      <Github size={14} />
-                      <span>Ver Código en GitHub</span>
-                      <ExternalLink size={12} className="ml-0.5" />
-                    </a>
+                  {project.docLink && project.githubLink ? (
+                    <div className="grid grid-cols-2 gap-2">
+                      <a
+                        href={project.docLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center justify-center gap-1.5 w-full text-[11px] font-semibold py-2 px-2 rounded-lg bg-gray-100 dark:bg-gray-700/80 hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-900 dark:text-white transition-colors border border-gray-200 dark:border-gray-600"
+                        title="Documentación Guía & SDD"
+                      >
+                        <BookOpen size={13} className="shrink-0" />
+                        <span className="truncate">Docs SDD</span>
+                        <ExternalLink size={10} className="shrink-0 ml-0.5 opacity-70" />
+                      </a>
+
+                      <a
+                        href={project.githubLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center justify-center gap-1.5 w-full text-[11px] font-semibold py-2 px-2 rounded-lg bg-gray-100 dark:bg-gray-700/80 hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-900 dark:text-white transition-colors border border-gray-200 dark:border-gray-600"
+                        title="Organización en GitHub"
+                      >
+                        <Github size={13} className="shrink-0" />
+                        <span className="truncate">GitHub</span>
+                        <ExternalLink size={10} className="shrink-0 ml-0.5 opacity-70" />
+                      </a>
+                    </div>
+                  ) : (
+                    project.githubLink && (
+                      <a
+                        href={project.githubLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center justify-center gap-2 w-full text-xs font-semibold py-2 px-3 rounded-lg bg-gray-100 dark:bg-gray-700/80 hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-900 dark:text-white transition-colors border border-gray-200 dark:border-gray-600"
+                      >
+                        <Github size={14} />
+                        <span>Ver Código en GitHub</span>
+                        <ExternalLink size={12} className="ml-0.5" />
+                      </a>
+                    )
                   )}
                 </div>
               </div>

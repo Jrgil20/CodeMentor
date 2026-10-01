@@ -21,8 +21,13 @@ const ResourcesPage: React.FC = () => {
     proyecto: 'bg-purple-100 text-purple-800 dark:bg-purple-950/60 dark:text-purple-300 border-purple-300'
   };
 
+  const getResourceTags = (tag: ResourceTag | ResourceTag[]): ResourceTag[] => {
+    return Array.isArray(tag) ? tag : [tag];
+  };
+
   const filteredResources = resources.filter((resource) => {
-    const matchesTag = selectedTag === 'all' || resource.tag === selectedTag;
+    const resourceTags = getResourceTags(resource.tag);
+    const matchesTag = selectedTag === 'all' || resourceTags.includes(selectedTag);
     const matchesSearch = 
       resource.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
       resource.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -119,10 +124,19 @@ const ResourcesPage: React.FC = () => {
                   </div>
 
                   <div className="p-6">
-                    <div className="flex items-center gap-2 mb-3">
-                      <span className={`text-[11px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-md border ${tagColors[resource.tag]}`}>
-                        [{resource.tag}]
-                      </span>
+                    <div className="flex flex-wrap items-center gap-1.5 mb-3">
+                      {getResourceTags(resource.tag).map((tag, idx) => (
+                        <span
+                          key={tag}
+                          className={`text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-md border ${
+                            idx === 0
+                              ? tagColors[tag]
+                              : 'bg-gray-50 text-gray-600 dark:bg-gray-800/80 dark:text-gray-400 border-gray-200 dark:border-gray-700'
+                          }`}
+                        >
+                          [{tag}]
+                        </span>
+                      ))}
                     </div>
 
                     <h3 className="text-base font-bold text-gray-900 dark:text-white mb-2 font-mono">

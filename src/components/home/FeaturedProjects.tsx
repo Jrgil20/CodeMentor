@@ -1,8 +1,14 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { ExternalLink, Github, Code2 } from 'lucide-react';
+import { ExternalLink, Github, Code2, BookOpen } from 'lucide-react';
 import { projects } from '../../data/projects';
 import Button from '../common/Button';
+import { ResourceTag } from '../../types';
+
+const getProjectTags = (tag?: ResourceTag | ResourceTag[]): ResourceTag[] => {
+  if (!tag) return [];
+  return Array.isArray(tag) ? tag : [tag];
+};
 
 const FeaturedProjects: React.FC = () => {
   const containerVariants = {
@@ -69,10 +75,21 @@ const FeaturedProjects: React.FC = () => {
                       PINNED
                     </span>
                   )}
-                  {project.tag && (
-                    <span className="absolute bottom-3 left-3 bg-black/75 backdrop-blur-sm text-white text-[11px] font-mono px-2 py-0.5 rounded">
-                      [{project.tag}]
-                    </span>
+                  {getProjectTags(project.tag).length > 0 && (
+                    <div className="absolute bottom-3 left-3 flex flex-wrap gap-1">
+                      {getProjectTags(project.tag).map((tag, idx) => (
+                        <span
+                          key={tag}
+                          className={`backdrop-blur-sm text-[11px] font-mono px-2 py-0.5 rounded ${
+                            idx === 0
+                              ? 'bg-black/80 text-white font-semibold'
+                              : 'bg-black/60 text-gray-300'
+                          }`}
+                        >
+                          [{tag}]
+                        </span>
+                      ))}
+                    </div>
                   )}
                 </div>
                 
@@ -118,6 +135,19 @@ const FeaturedProjects: React.FC = () => {
                   )}
                   <ExternalLink size={12} />
                 </a>
+
+                {project.docLink && (
+                  <a
+                    href={project.docLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center text-xs font-semibold text-emerald-600 dark:text-emerald-400 hover:text-emerald-700 dark:hover:text-emerald-300 transition-colors gap-1"
+                  >
+                    <BookOpen size={14} />
+                    <span>Docs SDD</span>
+                    <ExternalLink size={12} />
+                  </a>
+                )}
 
                 {project.githubLink && (
                   <a
