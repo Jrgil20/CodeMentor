@@ -28,10 +28,10 @@ const Hero: React.FC = () => {
   };
 
   const highlights = [
-    'Enfoque prioritario en Estructura de Datos (UCAB)',
-    'Tarifas desde $5/h con packs semanales y grupales ($2/h)',
-    'Metodología orientada a parciales y proyectos reales',
-    'Cursos modernos: Vibe Coding y desarrollo asistido por IA',
+    'Enfoque prioritario en Estructura de Datos y Bases de Datos (UCAB)',
+    'Tarifas desde $5/h con packs semanales, semestrales y grupales ($2/h)',
+    'Metodología orientada a parciales, laboratorios y proyectos reales',
+    'Seguimiento 1 a 1 y resolución de dudas durante todo el semestre',
   ];
 
   return (
@@ -54,7 +54,7 @@ const Hero: React.FC = () => {
               className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 dark:text-white mb-6 leading-tight"
               variants={itemVariants}
             >
-              Tutorías <span className="text-blue-600 dark:text-blue-400">UCAB</span> y Formación en Software con <span className="text-indigo-600 dark:text-indigo-400">IA</span>
+              Tutorías <span className="text-blue-600 dark:text-blue-400">UCAB</span> para <span className="text-indigo-600 dark:text-indigo-400">Ingeniería Informática</span>
             </motion.h1>
             
             <motion.p 
