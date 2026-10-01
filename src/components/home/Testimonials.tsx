@@ -123,7 +123,7 @@ const Testimonials: React.FC = () => {
                     </span>
                   </div>
 
-                  <p className="text-gray-800 dark:text-gray-200 text-base md:text-lg italic mb-6 leading-relaxed">
+                  <p className="text-gray-800 dark:text-gray-200 text-base md:text-lg italic mb-6 leading-relaxed whitespace-pre-line">
                     "{active.content}"
                   </p>
                   
@@ -133,64 +133,74 @@ const Testimonials: React.FC = () => {
                         {active.isAnonymous ? 'Estudiante UCAB (Anónimo)' : active.name}
                       </h4>
                       <p className="text-xs text-blue-600 dark:text-blue-400 font-medium">
-                        Materia: {active.subject}
+                        Materia: {active.subject} {active.role ? `• ${active.role}` : ''}
                       </p>
                     </div>
-                    <div className="flex text-amber-400 text-sm">
-                      {Array.from({ length: active.rating || 5 }).map((_, i) => (
-                        <span key={i}>★</span>
-                      ))}
-                    </div>
+                    {active.rating ? (
+                      <div className="flex text-amber-400 text-sm">
+                        {Array.from({ length: active.rating }).map((_, i) => (
+                          <span key={i}>★</span>
+                        ))}
+                      </div>
+                    ) : null}
                   </div>
                 </motion.div>
               </div>
               
-              {/* Controles */}
-              <div className="flex justify-between items-center mt-8 pt-4 border-t border-gray-100 dark:border-gray-800">
-                <button
-                  onClick={prevTestimonial}
-                  className="p-2 rounded-full bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
-                  aria-label="Testimonio anterior"
-                >
-                  <ChevronLeft size={20} className="text-gray-700 dark:text-gray-300" />
-                </button>
-                
-                <div className="flex space-x-2">
-                  {testimonials.map((_, index) => (
-                    <button
-                      key={index}
-                      onClick={() => setActiveIndex(index)}
-                      className={`w-2.5 h-2.5 rounded-full transition-all ${
-                        index === activeIndex
-                          ? 'bg-blue-600 dark:bg-blue-500 w-6'
-                          : 'bg-gray-300 dark:bg-gray-700'
-                      }`}
-                      aria-label={`Ir al testimonio ${index + 1}`}
-                    />
-                  ))}
+              {/* Controles: Solo si hay más de 1 testimonio */}
+              {testimonials.length > 1 && (
+                <div className="flex justify-between items-center mt-8 pt-4 border-t border-gray-100 dark:border-gray-800">
+                  <button
+                    onClick={prevTestimonial}
+                    className="p-2 rounded-full bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
+                    aria-label="Testimonio anterior"
+                  >
+                    <ChevronLeft size={20} className="text-gray-700 dark:text-gray-300" />
+                  </button>
+                  
+                  <div className="flex space-x-2">
+                    {testimonials.map((_, index) => (
+                      <button
+                        key={index}
+                        onClick={() => setActiveIndex(index)}
+                        className={`w-2.5 h-2.5 rounded-full transition-all ${
+                          index === activeIndex
+                            ? 'bg-blue-600 dark:bg-blue-500 w-6'
+                            : 'bg-gray-300 dark:bg-gray-700'
+                        }`}
+                        aria-label={`Ir al testimonio ${index + 1}`}
+                      />
+                    ))}
+                  </div>
+                  
+                  <button
+                    onClick={nextTestimonial}
+                    className="p-2 rounded-full bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
+                    aria-label="Siguiente testimonio"
+                  >
+                    <ChevronRight size={20} className="text-gray-700 dark:text-gray-300" />
+                  </button>
                 </div>
-                
-                <button
-                  onClick={nextTestimonial}
-                  className="p-2 rounded-full bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
-                  aria-label="Siguiente testimonio"
-                >
-                  <ChevronRight size={20} className="text-gray-700 dark:text-gray-300" />
-                </button>
-              </div>
+              )}
             </div>
           </div>
         ) : null}
 
-        {/* Llamado a Ex-Alumnos si hay testimonios existentes */}
+        {/* Llamado a Ex-Alumnos y Próximas Reseñas */}
         {testimonials.length > 0 && !showReviewForm && (
-          <div className="max-w-2xl mx-auto text-center">
+          <div className="max-w-2xl mx-auto text-center bg-white dark:bg-gray-900/60 rounded-2xl p-6 border border-gray-200 dark:border-gray-800 shadow-sm">
+            <h4 className="text-sm md:text-base font-semibold text-gray-900 dark:text-white mb-1">
+              Pronto se sumarán más reseñas reales
+            </h4>
+            <p className="text-xs text-gray-600 dark:text-gray-400 mb-4 max-w-md mx-auto">
+              Solo publicamos testimonios verificados de estudiantes que hayan cursado clases conmigo en la UCAB o de forma particular.
+            </p>
             <button
               onClick={() => setShowReviewForm(true)}
-              className="inline-flex items-center gap-2 text-xs md:text-sm font-semibold text-blue-600 dark:text-blue-400 hover:underline bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 px-4 py-2.5 rounded-xl shadow-sm"
+              className="inline-flex items-center gap-2 text-xs md:text-sm font-semibold text-white bg-blue-600 hover:bg-blue-700 px-5 py-2.5 rounded-xl shadow-sm transition-colors"
             >
               <MessageSquare size={16} />
-              ¿Viste clases o tutorías conmigo? Dejá tu reseña honesta acá
+              ¿Viste clases o tutorías conmigo? Dejá tu reseña acá
             </button>
           </div>
         )}
@@ -250,6 +260,44 @@ const Testimonials: React.FC = () => {
                     <div>
                       <label className="block text-xs font-medium text-gray-700 dark:text-gray-300 mb-1">Período o semestre</label>
                       <input type="text" name="period" required placeholder="Ej: Semestre 2024-15" className="w-full text-xs px-3 py-2 border rounded-md dark:bg-gray-800 dark:border-gray-700 dark:text-white" />
+                    </div>
+                  </div>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div>
+                      <label className="block text-xs font-medium text-gray-700 dark:text-gray-300 mb-1">
+                        Plan o modalidad (opcional)
+                      </label>
+                      <select
+                        name="plan"
+                        defaultValue=""
+                        className="w-full text-xs px-3 py-2 border rounded-md dark:bg-gray-800 dark:border-gray-700 dark:text-white bg-white"
+                      >
+                        <option value="">Seleccionar plan (opcional)</option>
+                        <option value="Acompañamiento Semestral">Acompañamiento Semestral</option>
+                        <option value="Pack Semanal (4 Horas)">Pack Semanal (4 Horas)</option>
+                        <option value="Sesión de 2 Horas">Sesión de 2 Horas</option>
+                        <option value="1 Hora Individual">1 Hora Individual</option>
+                        <option value="Plan Grupal UCAB">Plan Grupal UCAB</option>
+                        <option value="Preparaduría / Asesoría puntual">Preparaduría / Asesoría puntual</option>
+                        <option value="Otro">Otro</option>
+                      </select>
+                    </div>
+                    <div>
+                      <label className="block text-xs font-medium text-gray-700 dark:text-gray-300 mb-1">
+                        Calificación (opcional)
+                      </label>
+                      <select
+                        name="rating"
+                        defaultValue=""
+                        className="w-full text-xs px-3 py-2 border rounded-md dark:bg-gray-800 dark:border-gray-700 dark:text-white bg-white"
+                      >
+                        <option value="">Sin calificación / No especificar</option>
+                        <option value="5">★★★★★ (5/5 - Excelente)</option>
+                        <option value="4">★★★★☆ (4/5 - Muy buena)</option>
+                        <option value="3">★★★☆☆ (3/5 - Buena)</option>
+                        <option value="2">★★☆☆☆ (2/5 - Regular)</option>
+                        <option value="1">★☆☆☆☆ (1/5 - Deficiente)</option>
+                      </select>
                     </div>
                   </div>
                   <div>
