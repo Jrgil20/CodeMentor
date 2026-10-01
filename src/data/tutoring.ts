@@ -35,6 +35,36 @@ export const UCAB_SUBJECTS: Subject[] = [
     isMain: false,
     description: 'Práctica intensiva con tecnologías modernas, control de versiones (Git), trabajo colaborativo e integración de componentes.',
     topics: ['Git y GitHub', 'Desarrollo Full Stack', 'APIs REST', 'Bases de Datos']
+  },
+  {
+    id: 'ibm-z',
+    name: 'Mainframes, IBM Z & SkillsBuild',
+    isMain: false,
+    isFree: true,
+    badge: 'Clase Gratis (Embajador)',
+    description: 'Introducción al cómputo empresarial y mainframes. Arquitectura IBM Z, LinuxONE y rutas de acreditación oficial a través de IBM SkillsBuild.',
+    topics: ['Arquitectura IBM Z', 'LinuxONE & z/OS', 'IBM SkillsBuild', 'Certificaciones Oficiales'],
+    conditionNotice: '* Ciertas condiciones aplican: Sesión 100% bonificada en calidad de IBM Z Ambassador. Sujeta a disponibilidad de agenda.'
+  },
+  {
+    id: 'git-github',
+    name: 'Control de Versiones con Git & GitHub',
+    isMain: false,
+    isFree: true,
+    badge: 'Clase Gratis (30 min)',
+    description: 'Sesión intensiva y práctica de 30 minutos sobre gestión de repositorios, estrategias de ramas (branching), resolución de conflictos y Pull Requests.',
+    topics: ['Fundamentos de Git', 'Branching & Merge', 'Pull Requests en GitHub', 'Límite de 30 minutos'],
+    conditionNotice: '* Ciertas condiciones aplican: Sesión limitada estrictamente a 30 minutos. Válida para individuos o grupos (1 vez por persona/equipo).'
+  },
+  {
+    id: 'prog-comp',
+    name: 'Programación Competitiva (ICPC, RPC & Codeforces)',
+    isMain: false,
+    isFree: true,
+    badge: 'Clase Gratis (Equipos)',
+    description: 'Entrenamiento táctico en resolución algorítmica bajo presión, dinámicas de trabajo en contest y optimización extrema de tiempo de ejecución (Big O).',
+    topics: ['ICPC & RPC Contest', 'Problemas de Codeforces', 'Estrategia de Equipo', 'Algoritmos & Big O'],
+    conditionNotice: '* Ciertas condiciones aplican: Exclusiva para equipos o grupos de estudio formalmente constituidos (mínimo 1 equipo).'
   }
 ];
 

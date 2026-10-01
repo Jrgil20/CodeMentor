@@ -85,6 +85,9 @@ export interface Subject {
   name: string;
   code?: string;
   isMain?: boolean;
+  isFree?: boolean;
+  badge?: string;
+  conditionNotice?: string;
   description: string;
   topics: string[];
 }

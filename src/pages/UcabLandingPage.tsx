@@ -122,31 +122,48 @@ const UcabLandingPage: React.FC = () => {
             {UCAB_SUBJECTS.map((subject) => (
               <div
                 key={subject.id}
-                className={`p-6 rounded-2xl border transition-all ${
+                className={`p-6 rounded-2xl border transition-all flex flex-col justify-between ${
                   subject.isMain
                     ? 'bg-blue-50/60 dark:bg-blue-950/40 border-blue-400 dark:border-blue-600 ring-2 ring-blue-500/20 shadow-sm'
+                    : subject.isFree
+                    ? 'bg-emerald-50/60 dark:bg-emerald-950/30 border-emerald-400 dark:border-emerald-600/70 ring-2 ring-emerald-500/10 shadow-sm'
                     : 'bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-800 hover:border-blue-300 dark:hover:border-blue-700'
                 }`}
               >
-                {subject.isMain && (
-                  <span className="text-[11px] font-bold uppercase tracking-wider text-blue-600 dark:text-blue-400 block mb-2">
-                    ★ Enfoque Prioritario
-                  </span>
-                )}
-                <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">
-                  {subject.name}
-                </h3>
-                <p className="text-xs text-gray-600 dark:text-gray-300 mb-4 leading-relaxed">
-                  {subject.description}
-                </p>
-                <div className="space-y-1">
-                  {subject.topics.map((t, idx) => (
-                    <div key={idx} className="flex items-center text-xs text-gray-700 dark:text-gray-300">
-                      <ChevronRight size={13} className="text-blue-500 mr-1 flex-shrink-0" />
-                      <span>{t}</span>
-                    </div>
-                  ))}
+                <div>
+                  {subject.isMain && (
+                    <span className="text-[11px] font-bold uppercase tracking-wider text-blue-600 dark:text-blue-400 block mb-2">
+                      ★ Enfoque Prioritario
+                    </span>
+                  )}
+                  {subject.isFree && (
+                    <span className="inline-block text-[11px] font-bold uppercase tracking-wider text-emerald-700 dark:text-emerald-300 bg-emerald-100 dark:bg-emerald-900/60 px-2.5 py-0.5 rounded-full border border-emerald-300 dark:border-emerald-700 mb-2">
+                      🎁 {subject.badge || 'Clase Gratis'}
+                    </span>
+                  )}
+                  <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">
+                    {subject.name}
+                  </h3>
+                  <p className="text-xs text-gray-600 dark:text-gray-300 mb-4 leading-relaxed">
+                    {subject.description}
+                  </p>
+                  <div className="space-y-1 mb-4">
+                    {subject.topics.map((t, idx) => (
+                      <div key={idx} className="flex items-center text-xs text-gray-700 dark:text-gray-300">
+                        <ChevronRight size={13} className={subject.isFree ? "text-emerald-500 mr-1 flex-shrink-0" : "text-blue-500 mr-1 flex-shrink-0"} />
+                        <span>{t}</span>
+                      </div>
+                    ))}
+                  </div>
                 </div>
+
+                {subject.conditionNotice && (
+                  <div className="pt-3 mt-auto border-t border-emerald-200/60 dark:border-emerald-800/60">
+                    <p className="text-[10px] text-emerald-800/80 dark:text-emerald-400 leading-tight">
+                      {subject.conditionNotice}
+                    </p>
+                  </div>
+                )}
               </div>
             ))}
           </div>
