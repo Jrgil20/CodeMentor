@@ -31,16 +31,18 @@ const ResourcesPage: React.FC = () => {
     return Array.isArray(tag) ? tag : [tag];
   };
 
-  const filteredResources = resources.filter((resource) => {
-    const resourceTags = getResourceTags(resource.tag);
-    const matchesTag = selectedTag === 'all' || resourceTags.includes(selectedTag);
-    const matchesSearch = 
-      resource.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      resource.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      resource.category.toLowerCase().includes(searchQuery.toLowerCase());
+  const filteredResources = resources
+    .filter((resource) => {
+      const resourceTags = getResourceTags(resource.tag);
+      const matchesTag = selectedTag === 'all' || resourceTags.includes(selectedTag);
+      const matchesSearch = 
+        resource.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        resource.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        resource.category.toLowerCase().includes(searchQuery.toLowerCase());
 
-    return matchesTag && matchesSearch;
-  });
+      return matchesTag && matchesSearch;
+    })
+    .sort((a, b) => (b.pinned ? 1 : 0) - (a.pinned ? 1 : 0));
 
   return (
     <>

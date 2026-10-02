@@ -12,6 +12,8 @@ const getProjectTags = (tag?: ResourceTag | ResourceTag[]): ResourceTag[] => {
 };
 
 const ProjectsPage: React.FC = () => {
+  const sortedProjects = [...projects].sort((a, b) => (b.pinned ? 1 : 0) - (a.pinned ? 1 : 0));
+
   return (
     <>
       <Helmet>
@@ -27,7 +29,7 @@ const ProjectsPage: React.FC = () => {
           background="light"
         >
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
-            {projects.map((project) => (
+            {sortedProjects.map((project) => (
               <div
                 key={project.id}
                 className={`bg-white dark:bg-gray-800 rounded-2xl overflow-hidden shadow-sm border transition-all hover:shadow-md flex flex-col justify-between ${
