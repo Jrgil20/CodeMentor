@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
-import { Search, ExternalLink, Github, Code2 } from 'lucide-react';
+import { Search, ExternalLink, Github, Code2, Clock } from 'lucide-react';
 import { resources } from '../data/resources';
 import Section from '../components/common/Section';
 import { ResourceTag } from '../types';
@@ -10,15 +10,21 @@ const ResourcesPage: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState('');
 
   const tagLabels: Record<ResourceTag, string> = {
+    beca: 'Beca',
     herramienta: 'Herramienta',
     lab: 'Laboratorio (Lab)',
-    proyecto: 'Proyecto'
+    proyecto: 'Proyecto',
+    oportunidad: 'Oportunidad',
+    plataforma: 'Plataforma'
   };
 
   const tagColors: Record<ResourceTag, string> = {
+    beca: 'bg-amber-100 text-amber-800 dark:bg-amber-950/60 dark:text-amber-300 border-amber-300',
     herramienta: 'bg-emerald-100 text-emerald-800 dark:bg-emerald-950/60 dark:text-emerald-300 border-emerald-300',
     lab: 'bg-blue-100 text-blue-800 dark:bg-blue-950/60 dark:text-blue-300 border-blue-300',
-    proyecto: 'bg-purple-100 text-purple-800 dark:bg-purple-950/60 dark:text-purple-300 border-purple-300'
+    proyecto: 'bg-purple-100 text-purple-800 dark:bg-purple-950/60 dark:text-purple-300 border-purple-300',
+    oportunidad: 'bg-indigo-100 text-indigo-800 dark:bg-indigo-950/60 dark:text-indigo-300 border-indigo-300',
+    plataforma: 'bg-cyan-100 text-cyan-800 dark:bg-cyan-950/60 dark:text-cyan-300 border-cyan-300'
   };
 
   const getResourceTags = (tag: ResourceTag | ResourceTag[]): ResourceTag[] => {
@@ -79,7 +85,7 @@ const ResourcesPage: React.FC = () => {
               >
                 Todos los recursos
               </button>
-              {(['herramienta', 'lab', 'proyecto'] as ResourceTag[]).map((tag) => (
+              {(['beca', 'herramienta', 'lab', 'proyecto', 'oportunidad', 'plataforma'] as ResourceTag[]).map((tag) => (
                 <button
                   key={tag}
                   onClick={() => setSelectedTag(tag)}
@@ -116,6 +122,12 @@ const ResourcesPage: React.FC = () => {
                     {resource.pinned && (
                       <span className="absolute top-3 right-3 bg-amber-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full shadow-sm">
                         PINNED
+                      </span>
+                    )}
+                    {resource.expiresBadge && (
+                      <span className="absolute top-3 left-3 bg-amber-600/90 dark:bg-amber-700/90 text-white text-[10px] font-bold px-2.5 py-1 rounded-full shadow-md flex items-center gap-1.5 backdrop-blur-sm border border-amber-300/30">
+                        <Clock size={12} className="shrink-0" />
+                        <span>{resource.expiresBadge}</span>
                       </span>
                     )}
                     <span className="absolute bottom-3 left-3 bg-black/70 backdrop-blur-sm text-white text-[11px] font-semibold px-2.5 py-0.5 rounded-md">
@@ -164,6 +176,11 @@ const ResourcesPage: React.FC = () => {
                       <>
                         <Github size={14} />
                         <span>Ver en GitHub</span>
+                      </>
+                    ) : resource.type === 'scholarship' || resource.link.includes('aveci.org') ? (
+                      <>
+                        <Code2 size={14} />
+                        <span>Ir a la Beca en aveci.org</span>
                       </>
                     ) : (
                       <>

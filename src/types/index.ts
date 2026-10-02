@@ -1,4 +1,4 @@
-export type ResourceTag = 'herramienta' | 'lab' | 'proyecto';
+export type ResourceTag = 'herramienta' | 'lab' | 'proyecto' | 'beca' | 'oportunidad' | 'plataforma';
 
 export interface Testimonial {
   id: number;
@@ -45,12 +45,13 @@ export interface Resource {
   description: string;
   category: string;
   tag: ResourceTag | ResourceTag[];
-  type: 'video' | 'article' | 'tutorial' | 'tool' | 'project' | 'lab';
+  type: 'video' | 'article' | 'tutorial' | 'tool' | 'project' | 'lab' | 'scholarship';
   link: string;
   githubLink?: string;
   docLink?: string;
   image: string;
   pinned?: boolean;
+  expiresBadge?: string;
 }
 
 export interface Course {

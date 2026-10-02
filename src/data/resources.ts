@@ -114,5 +114,17 @@ export const resources: Resource[] = [
     type: "lab",
     link: "https://github.com/Jrgil20/Numerical_methods",
     image: "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?auto=format&fit=crop&w=600&q=80"
+  },
+  {
+    id: 12,
+    title: "Beca de Programación Competitiva — Academia CPC (AVECI)",
+    description: "En la página principal de aveci.org tienen una beca para hacer el curso de Programación Competitiva en la Academia CPC. Oportunidad de formación intensiva en algoritmos avanzados, resolución de problemas y estructuras de datos para competencias.",
+    category: "Becas y Comunidad",
+    tag: ["beca", "oportunidad", "plataforma"],
+    type: "scholarship",
+    link: "https://aveci.org",
+    image: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=600&q=80",
+    pinned: true,
+    expiresBadge: "Válido hasta Agosto 2027"
   }
 ];
