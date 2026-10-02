@@ -1,9 +1,10 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import { motion } from 'framer-motion';
-import { Code, Users, Calendar, BookOpen, PenTool, Target, CheckCircle, Filter } from 'lucide-react';
+import { Code, Users, Calendar, BookOpen, PenTool, Target, CheckCircle, Filter, Clock, CalendarDays } from 'lucide-react';
 import Section from '../components/common/Section';
 import Button from '../components/common/Button';
+import { CURRENT_SEMESTER_SCHEDULE } from '../data/schedule';
 
 const MethodologyPage: React.FC = () => {
   const containerVariants = {
@@ -235,6 +236,10 @@ const MethodologyPage: React.FC = () => {
                     <span className="bg-blue-600 text-white w-6 h-6 rounded-full flex items-center justify-center text-sm mr-3 mt-0.5 flex-shrink-0">4</span>
                     <span><strong>Herramientas:</strong> Entornos colaborativos de desarrollo, repositorios Git compartidos y herramientas de comunicación asíncrona.</span>
                   </li>
+                  <li className="flex items-start">
+                    <span className="bg-blue-600 text-white w-6 h-6 rounded-full flex items-center justify-center text-sm mr-3 mt-0.5 flex-shrink-0">5</span>
+                    <span><strong>Temario a demanda y diagnóstico continuo:</strong> Podés ir pidiéndome los temas específicos que necesites cubrir; durante cada sesión evaluamos dónde están tus fallas o bloqueos para concentrar el esfuerzo y la práctica exactamente allí.</span>
+                  </li>
                 </ul>
               </div>
             </div>
@@ -264,6 +269,133 @@ const MethodologyPage: React.FC = () => {
                   </li>
                 </ul>
               </div>
+            </div>
+          </div>
+        </Section>
+
+        {/* Schedule / Disponibilidad Section */}
+        <Section background="light">
+          <div className="max-w-4xl mx-auto">
+            <div className="text-center mb-10">
+              <div className="inline-flex items-center justify-center gap-2 px-3 py-1 rounded-full bg-blue-100 dark:bg-blue-900/40 text-blue-700 dark:text-blue-300 text-xs font-semibold uppercase tracking-wider mb-3">
+                <CalendarDays size={16} />
+                Semestre {CURRENT_SEMESTER_SCHEDULE.semester}
+              </div>
+              <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
+                Horarios Disponibles
+              </h2>
+              <p className="text-base text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+                {CURRENT_SEMESTER_SCHEDULE.description} Total estimado de{' '}
+                <span className="font-semibold text-blue-600 dark:text-blue-400">
+                  {CURRENT_SEMESTER_SCHEDULE.totalWeeklyHours} horas semanales
+                </span>{' '}
+                dedicadas a clases y mentorías.
+              </p>
+            </div>
+
+            {/* Desktop Table View */}
+            <div className="hidden md:block bg-white dark:bg-gray-800 rounded-xl shadow-lg border border-gray-200 dark:border-gray-700 overflow-hidden">
+              <table className="w-full text-left border-collapse">
+                <thead>
+                  <tr className="bg-gray-50 dark:bg-gray-700/50 border-b border-gray-200 dark:border-gray-700 text-xs font-semibold uppercase tracking-wider text-gray-600 dark:text-gray-300">
+                    <th className="py-4 px-6">Día</th>
+                    <th className="py-4 px-6">Jornada</th>
+                    <th className="py-4 px-6">Franja Horaria</th>
+                    <th className="py-4 px-6 text-center">Horas Estimadas</th>
+                    <th className="py-4 px-6">Compromisos / Observaciones</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-gray-200 dark:divide-gray-700 text-sm text-gray-800 dark:text-gray-200">
+                  {CURRENT_SEMESTER_SCHEDULE.slots.map((slot) => (
+                    <tr
+                      key={slot.day}
+                      className="hover:bg-blue-50/40 dark:hover:bg-gray-700/40 transition-colors"
+                    >
+                      <td className="py-4 px-6 font-bold text-gray-900 dark:text-white">
+                        {slot.day}
+                      </td>
+                      <td className="py-4 px-6">
+                        <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium capitalize ${
+                          slot.period === 'mañana'
+                            ? 'bg-amber-100 dark:bg-amber-950/60 text-amber-800 dark:text-amber-300'
+                            : 'bg-indigo-100 dark:bg-indigo-950/60 text-indigo-800 dark:text-indigo-300'
+                        }`}>
+                          {slot.period}
+                        </span>
+                      </td>
+                      <td className="py-4 px-6 font-medium text-gray-700 dark:text-gray-300">
+                        <div className="flex items-center gap-2">
+                          <Clock size={16} className="text-blue-500" />
+                          <span>{slot.timeRange}</span>
+                        </div>
+                      </td>
+                      <td className="py-4 px-6 text-center font-semibold text-blue-600 dark:text-blue-400">
+                        {slot.hours} h
+                      </td>
+                      <td className="py-4 px-6">
+                        {slot.commitmentNote ? (
+                          <span className="inline-flex items-center text-xs text-gray-600 dark:text-gray-300 italic bg-gray-100 dark:bg-gray-700/60 px-2.5 py-1 rounded-md">
+                            {slot.commitmentNote}
+                          </span>
+                        ) : (
+                          <span className="text-gray-400">—</span>
+                        )}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+
+            {/* Mobile Cards View */}
+            <div className="md:hidden space-y-4">
+              {CURRENT_SEMESTER_SCHEDULE.slots.map((slot) => (
+                <div
+                  key={slot.day}
+                  className="bg-white dark:bg-gray-800 rounded-xl p-5 shadow-md border border-gray-200 dark:border-gray-700"
+                >
+                  <div className="flex items-center justify-between mb-3">
+                    <h3 className="text-lg font-bold text-gray-900 dark:text-white">
+                      {slot.day}
+                    </h3>
+                    <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium capitalize ${
+                      slot.period === 'mañana'
+                        ? 'bg-amber-100 dark:bg-amber-950/60 text-amber-800 dark:text-amber-300'
+                        : 'bg-indigo-100 dark:bg-indigo-950/60 text-indigo-800 dark:text-indigo-300'
+                    }`}>
+                      {slot.period}
+                    </span>
+                  </div>
+
+                  <div className="space-y-2 text-sm text-gray-700 dark:text-gray-300 mb-3">
+                    <div className="flex items-center justify-between">
+                      <span className="text-xs text-gray-500 dark:text-gray-400 flex items-center gap-1.5">
+                        <Clock size={15} className="text-blue-500" />
+                        Horario:
+                      </span>
+                      <span className="font-semibold">{slot.timeRange}</span>
+                    </div>
+
+                    <div className="flex items-center justify-between">
+                      <span className="text-xs text-gray-500 dark:text-gray-400">Duración:</span>
+                      <span className="font-bold text-blue-600 dark:text-blue-400">{slot.hours} horas</span>
+                    </div>
+                  </div>
+
+                  {slot.commitmentNote && (
+                    <div className="pt-2 border-t border-gray-100 dark:border-gray-700 text-xs text-gray-500 dark:text-gray-400 italic">
+                      {slot.commitmentNote}
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+
+            {/* Note / Callout */}
+            <div className="mt-8 text-center">
+              <p className="text-xs text-gray-500 dark:text-gray-400">
+                * Los horarios pueden coordinarse y ajustarse según la conveniencia mutua y las fechas de evaluaciones.
+              </p>
             </div>
           </div>
         </Section>
