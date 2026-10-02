@@ -123,15 +123,14 @@ export const TUTORING_PLANS: TutoringPlan[] = [
     id: 'semester-plan',
     title: 'Acompañamiento Semestral',
     subtitle: 'Seguimiento durante todo el período académico',
-    price: 40,
-    priceSuffix: '/ mes (aprox.)',
-    rateDetail: 'Tarifa preferencial $5/h con horas configurables',
-    description: 'Garantizá aprobar la materia con constancia. Horas adaptables según el cronograma de parciales y proyectos.',
+    price: 5,
+    priceSuffix: '/ hora',
+    rateDetail: '~ $40/mes estimado (ej. 2 horas semanales)',
+    description: 'Garantizá aprobar la materia con constancia. Pagás solo las horas que necesitás, adaptadas al ritmo de parciales y proyectos.',
     features: [
-      'Clase semanal fija de horas configurables',
-      'Tutoría durante todo el semestre',
-      'Soporte continuo para asignaciones y proyectos',
-      'Garantía de cupo reservado'
+      'Pagás solo las horas que necesitás: si estás listo antes del parcial, no pagás clases de relleno',
+      'Horas adaptables: aumentamos la carga antes de entregas y la reducimos cuando el contenido esté dominado',
+      'Cupo y seguimiento fijo: reserva de horario semanal para no quedarte sin tutor en semanas críticas'
     ],
     popular: true,
     badge: 'Más elegido'
