@@ -43,8 +43,25 @@ const AboutPage: React.FC = () => {
     },
     {
       title: "Programación Competitiva (ICPC)",
-      organization: "ICPC Super Regional Venezuela-Colombia",
-      description: "Clasificado al Super Regional internacional y 1.º y 5.º lugar en los maratones oficiales de programación competitiva de la UCAB."
+      organization: "International Collegiate Programming Contest",
+      seasons: [
+        {
+          period: "2025–2026",
+          team: "Ctrl+h",
+          contests: [
+            { name: "The 2025 ICPC Venezuela Finals", rank: "Rank 7 — Seventh Place" },
+            { name: "The 2025 ICPC South America North Finals", rank: "Rank 51 — Fifty-first Place" }
+          ]
+        },
+        {
+          period: "2024–2025",
+          team: "Ctrl+z",
+          contests: [
+            { name: "The 2024 ICPC Venezuela Finals", rank: "Contestant (Finalista Nacional)" },
+            { name: "The 2024 ICPC South America-North Finals", rank: "Rank 49 — Honorable Mention" }
+          ]
+        }
+      ]
     },
     {
       title: "IBM Z Student Ambassador",
@@ -259,9 +276,38 @@ const AboutPage: React.FC = () => {
                   <p className="text-xs font-semibold text-blue-600 dark:text-blue-400 mb-3">
                     {item.organization}
                   </p>
-                  <p className="text-xs text-gray-600 dark:text-gray-300 leading-relaxed">
-                    {item.description}
-                  </p>
+                  {'seasons' in item && item.seasons ? (
+                    <div className="space-y-2.5 mt-2">
+                      {item.seasons.map((season, sIdx) => (
+                        <div key={sIdx} className="bg-gray-50 dark:bg-gray-900/50 p-2.5 rounded-xl border border-gray-100 dark:border-gray-700/60 text-xs">
+                          <div className="flex items-center justify-between gap-1 mb-1 font-mono">
+                            <span className="font-bold text-blue-600 dark:text-blue-400 text-[11px]">
+                              {season.period}
+                            </span>
+                            <span className="text-[10px] font-semibold px-2 py-0.5 rounded-md bg-blue-100/70 dark:bg-blue-950 text-blue-700 dark:text-blue-300 border border-blue-200 dark:border-blue-800/40">
+                              Team: {season.team}
+                            </span>
+                          </div>
+                          <ul className="space-y-1 text-[11px]">
+                            {season.contests.map((c, cIdx) => (
+                              <li key={cIdx} className="text-gray-700 dark:text-gray-300 leading-snug">
+                                <span className="font-medium text-gray-900 dark:text-white">• {c.name}</span>
+                                {c.rank && (
+                                  <span className="block text-[10px] text-emerald-600 dark:text-emerald-400 font-semibold pl-2">
+                                    ↳ {c.rank}
+                                  </span>
+                                )}
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      ))}
+                    </div>
+                  ) : (
+                    <p className="text-xs text-gray-600 dark:text-gray-300 leading-relaxed">
+                      {item.description}
+                    </p>
+                  )}
                 </div>
               </motion.div>
             ))}
