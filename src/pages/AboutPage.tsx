@@ -323,7 +323,7 @@ const AboutPage: React.FC = () => {
                     className={`p-4 rounded-xl border text-xs ${
                       edu.highlight 
                         ? 'bg-blue-50/50 dark:bg-blue-950/30 border-blue-200 dark:border-blue-800/50' 
-                        : 'bg-gray-50 dark:bg-gray-750 border-gray-200 dark:border-gray-700'
+                        : 'bg-gray-50 dark:bg-gray-900/50 border-gray-200 dark:border-gray-700'
                     }`}
                   >
                     <div className="flex items-center justify-between gap-2 mb-1">
