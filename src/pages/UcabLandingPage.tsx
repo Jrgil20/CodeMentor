@@ -3,6 +3,7 @@ import { Helmet } from 'react-helmet-async';
 import { 
   Check, 
   AlertCircle, 
+  Clock,
   MessageCircle, 
   ShieldCheck, 
   Send, 
@@ -10,9 +11,10 @@ import {
   ChevronRight,
   MessageSquare
 } from 'lucide-react';
-import { UCAB_SUBJECTS, TUTORING_PLANS, TUTORING_LIMITS, CONTACT_CONFIG, getWhatsappUrl } from '../data/tutoring';
+import { UCAB_SUBJECTS, TUTORING_PLANS, TUTORING_LIMITS, AVAILABLE_SCHEDULES, CONTACT_CONFIG, getWhatsappUrl } from '../data/tutoring';
 import { testimonials } from '../data/testimonials';
 import Button from '../components/common/Button';
+import AvailableSchedules from '../components/tutoring/AvailableSchedules';
 
 const UcabLandingPage: React.FC = () => {
   const [submitted, setSubmitted] = useState(false);
@@ -48,7 +50,7 @@ const UcabLandingPage: React.FC = () => {
         <title>Tutorías UCAB | Estructura de Datos y Programación</title>
         <meta 
           name="description" 
-          content="Tutorías personalizadas para estudiantes de la UCAB. Enfoque prioritario en Estructura de Datos, POO y materias de la carrera. Cupos limitados y tarifas accesibles." 
+          content="Tutorías personalizadas para estudiantes de la UCAB. Enfoque prioritario en Estructura de Datos, POO y materias de la carrera. Horarios semanales disponibles y tarifas accesibles." 
         />
       </Helmet>
 
@@ -57,11 +59,14 @@ const UcabLandingPage: React.FC = () => {
         <div className="container mx-auto px-4 md:px-6">
           <div className="max-w-4xl mx-auto text-center">
             
-            {/* Badge de Cupos Estrictos */}
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold bg-amber-100 text-amber-900 dark:bg-amber-950/70 dark:text-amber-300 border border-amber-300 dark:border-amber-700 mb-6 shadow-sm">
-              <AlertCircle size={15} className="text-amber-600 dark:text-amber-400" />
-              <span>Solo {TUTORING_LIMITS.availableSpots} cupos activos disponibles este semestre</span>
-            </div>
+            {/* Badge de Horarios Disponibles */}
+            <a 
+              href="#horarios"
+              className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold bg-emerald-100 text-emerald-900 dark:bg-emerald-950/70 dark:text-emerald-300 border border-emerald-300 dark:border-emerald-700 mb-6 shadow-sm hover:bg-emerald-200/70 transition-colors"
+            >
+              <Clock size={15} className="text-emerald-600 dark:text-emerald-400" />
+              <span>{TUTORING_LIMITS.totalAvailableHours} horas semanales disponibles · Ver horarios</span>
+            </a>
 
             <h1 className="text-3xl sm:text-5xl md:text-6xl font-black text-gray-900 dark:text-white mb-6 tracking-tight leading-tight">
               Tutorías UCAB: Aprobá <span className="text-blue-600 dark:text-blue-400">Estructura de Datos</span> con Criterio Técnico
@@ -73,13 +78,13 @@ const UcabLandingPage: React.FC = () => {
 
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-10">
               <a
-                href={getWhatsappUrl('Hola! Soy estudiante de la UCAB y quiero consultar por las tutorías de Estructura de Datos y Bases de Datos')}
+                href={getWhatsappUrl('Hola! Soy estudiante de la UCAB y quiero coordinar una tutoría en los horarios disponibles')}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white font-semibold text-sm px-6 py-3.5 rounded-xl transition-all shadow-md hover:shadow-lg"
               >
                 <MessageCircle size={18} />
-                Consultar cupo por WhatsApp
+                Agendar horario por WhatsApp
               </a>
               <Button to="#tarifas" variant="outline" size="lg" className="w-full sm:w-auto">
                 Ver planes y tarifas ($7.5 / $12 / $20)
@@ -347,6 +352,13 @@ const UcabLandingPage: React.FC = () => {
         </div>
       </section>
 
+      {/* Horarios Disponibles */}
+      <section id="horarios" className="py-16 md:py-20 bg-gray-50/70 dark:bg-gray-800/50 border-t border-gray-200 dark:border-gray-800">
+        <div className="container mx-auto px-4 md:px-6 max-w-5xl">
+          <AvailableSchedules />
+        </div>
+      </section>
+
       {/* Formulario / Contacto */}
       <section className="py-16 md:py-20 bg-gray-50 dark:bg-gray-900 border-t border-gray-200 dark:border-gray-800">
         <div className="container mx-auto px-4 md:px-6">
@@ -393,6 +405,18 @@ const UcabLandingPage: React.FC = () => {
                     <label className="block text-xs font-medium text-gray-700 dark:text-gray-300 mb-1">WhatsApp (opcional)</label>
                     <input type="tel" name="whatsapp" placeholder="+58 4XX..." className="w-full text-xs px-3.5 py-2.5 border rounded-lg dark:bg-gray-800 dark:border-gray-700 dark:text-white" />
                   </div>
+                </div>
+
+                <div>
+                  <label className="block text-xs font-medium text-gray-700 dark:text-gray-300 mb-1">Horario disponible de tu preferencia</label>
+                  <select name="horario_preferido" className="w-full text-xs px-3.5 py-2.5 border rounded-lg dark:bg-gray-800 dark:border-gray-700 dark:text-white">
+                    <option value="A convenir">A convenir / Cualquier franja disponible</option>
+                    {AVAILABLE_SCHEDULES.map((slot) => (
+                      <option key={slot.id} value={`${slot.day}: ${slot.timeRange} (${slot.duration})`}>
+                        {slot.day}: {slot.timeRange} ({slot.duration})
+                      </option>
+                    ))}
+                  </select>
                 </div>
 
                 <div>

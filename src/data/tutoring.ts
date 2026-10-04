@@ -1,4 +1,4 @@
-import { Subject, TutoringPlan } from '../types';
+import { Subject, TutoringPlan, TutoringScheduleSlot } from '../types';
 
 export const UCAB_SUBJECTS: Subject[] = [
   {
@@ -130,7 +130,7 @@ export const TUTORING_PLANS: TutoringPlan[] = [
     features: [
       'Pagás solo las horas que necesitás: si estás listo antes del parcial, no pagás clases de relleno',
       'Horas adaptables: aumentamos la carga antes de entregas y la reducimos cuando el contenido esté dominado',
-      'Cupo y seguimiento fijo: reserva de horario semanal para no quedarte sin tutor en semanas críticas'
+      'Horario y seguimiento fijo: reserva de franja semanal para no quedarte sin tutor en semanas críticas'
     ],
     popular: true,
     badge: 'Más elegido'
@@ -155,10 +155,49 @@ export const TUTORING_PLANS: TutoringPlan[] = [
   }
 ];
 
+export const AVAILABLE_SCHEDULES: TutoringScheduleSlot[] = [
+  {
+    id: 'lunes-11-13',
+    day: 'Lunes',
+    timeRange: '11:00 am a 1:00 pm',
+    duration: '2 horas',
+    isAvailable: true,
+  },
+  {
+    id: 'miercoles-09-12',
+    day: 'Miércoles',
+    timeRange: '9:00 am a 12:00 pm',
+    duration: '3 horas',
+    isAvailable: true,
+  },
+  {
+    id: 'jueves-16-17',
+    day: 'Jueves',
+    timeRange: '4:00 pm a 5:00 pm',
+    duration: '1 hora',
+    isAvailable: true,
+  },
+  {
+    id: 'viernes-manana-09-12',
+    day: 'Viernes (Mañana)',
+    timeRange: '9:00 am a 12:00 pm',
+    duration: '3 horas',
+    isAvailable: true,
+  },
+  {
+    id: 'viernes-tarde-15-16',
+    day: 'Viernes (Tarde)',
+    timeRange: '3:00 pm a 4:00 pm',
+    duration: '1 hora',
+    isAvailable: true,
+  },
+];
+
 export const TUTORING_LIMITS = {
-  maxStudents: 6,
+  activeStudents: 2,
   availableSpots: 2,
-  notice: 'Cupos estrictamente limitados para garantizar seguimiento personalizado real a cada estudiante.'
+  totalAvailableHours: 10,
+  notice: 'Franjas horarias semanales abiertas para asesorías personalizadas y preparación de parciales.'
 };
 
 export const CONTACT_CONFIG = {
@@ -167,7 +206,7 @@ export const CONTACT_CONFIG = {
   email: 'jrgil.20@est.ucab.edu.ve',
   githubUser: 'Jrgil20',
   githubUrl: 'https://github.com/Jrgil20',
-  defaultWhatsappMessage: 'Hola! Me interesa agendar tutorías para la UCAB (Estructura de Datos / Bases de Datos / Programación).'
+  defaultWhatsappMessage: 'Hola! Me interesa coordinar una tutoría en los horarios disponibles para la UCAB.'
 };
 
 export const getWhatsappUrl = (message?: string): string => {

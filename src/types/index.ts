@@ -81,6 +81,14 @@ export interface TutoringPlan {
   badge?: string;
 }
 
+export interface TutoringScheduleSlot {
+  id: string;
+  day: string;
+  timeRange: string;
+  duration: string;
+  isAvailable?: boolean;
+}
+
 export interface Subject {
   id: string;
   name: string;

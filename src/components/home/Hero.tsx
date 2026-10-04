@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { CheckCircle, AlertCircle } from 'lucide-react';
+import { CheckCircle, Clock } from 'lucide-react';
 import Button from '../common/Button';
 import { TUTORING_LIMITS } from '../../data/tutoring';
 
@@ -44,10 +44,10 @@ const Hero: React.FC = () => {
             animate="visible"
             variants={containerVariants}
           >
-            {/* Badge de Cupos */}
-            <motion.div variants={itemVariants} className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-semibold bg-amber-100 text-amber-900 dark:bg-amber-900/40 dark:text-amber-300 border border-amber-300 dark:border-amber-700 mb-6">
-              <AlertCircle size={14} className="text-amber-600 dark:text-amber-400" />
-              <span>Cupos limitados: solo {TUTORING_LIMITS.availableSpots} lugares disponibles para seguimiento 1 a 1</span>
+            {/* Badge de Horarios Disponibles */}
+            <motion.div variants={itemVariants} className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-semibold bg-emerald-100 text-emerald-900 dark:bg-emerald-900/40 dark:text-emerald-300 border border-emerald-300 dark:border-emerald-700 mb-6">
+              <Clock size={14} className="text-emerald-600 dark:text-emerald-400" />
+              <span>{TUTORING_LIMITS.totalAvailableHours} horas semanales disponibles para tutorías</span>
             </motion.div>
 
             <motion.h1 

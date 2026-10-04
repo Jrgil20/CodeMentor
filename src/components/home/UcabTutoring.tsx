@@ -1,7 +1,8 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Check, BookOpen, AlertCircle, MessageCircle } from 'lucide-react';
+import { Check, BookOpen, MessageCircle } from 'lucide-react';
 import Button from '../common/Button';
+import AvailableSchedules from '../tutoring/AvailableSchedules';
 import { UCAB_SUBJECTS, TUTORING_PLANS, TUTORING_LIMITS, getWhatsappUrl } from '../../data/tutoring';
 
 const UcabTutoring: React.FC = () => {
@@ -18,30 +19,9 @@ const UcabTutoring: React.FC = () => {
     <section id="tutorias-ucab" className="py-16 md:py-24 bg-gray-50 dark:bg-gray-800/60 border-y border-gray-200 dark:border-gray-800">
       <div className="container mx-auto px-4 md:px-6">
         
-        {/* Banner de Cupos Limitados */}
-        <div className="max-w-4xl mx-auto mb-10">
-          <div className="bg-amber-50 dark:bg-amber-950/40 border border-amber-300 dark:border-amber-700/60 rounded-xl p-4 md:p-5 flex flex-col sm:flex-row items-center justify-between gap-4">
-            <div className="flex items-center gap-3 text-amber-900 dark:text-amber-200">
-              <AlertCircle className="w-6 h-6 text-amber-600 dark:text-amber-400 flex-shrink-0" />
-              <div>
-                <p className="font-semibold text-sm md:text-base">
-                  Cupos estrictamente limitados: solo {TUTORING_LIMITS.availableSpots} lugares disponibles este semestre
-                </p>
-                <p className="text-xs md:text-sm text-amber-800/80 dark:text-amber-300/80">
-                  {TUTORING_LIMITS.notice}
-                </p>
-              </div>
-            </div>
-            <a
-              href={getWhatsappUrl('Hola! Quisiera consultar disponibilidad de cupo para tutorías UCAB')}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 whitespace-nowrap bg-emerald-600 hover:bg-emerald-700 text-white text-xs md:text-sm font-semibold px-4 py-2 rounded-lg transition-colors shadow-sm"
-            >
-              <MessageCircle size={16} />
-              Consultar cupo por WhatsApp
-            </a>
-          </div>
+        {/* Horarios Disponibles */}
+        <div className="max-w-4xl mx-auto mb-12">
+          <AvailableSchedules />
         </div>
 
         {/* Encabezado */}

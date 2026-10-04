@@ -4,7 +4,8 @@ import { motion } from 'framer-motion';
 import { Clock, CheckCircle, BookOpen, Users, AlertCircle, MessageCircle, Send } from 'lucide-react';
 import Section from '../components/common/Section';
 import Button from '../components/common/Button';
-import { TUTORING_LIMITS, TUTORING_PLANS, UCAB_SUBJECTS, CONTACT_CONFIG, getWhatsappUrl } from '../data/tutoring';
+import AvailableSchedules from '../components/tutoring/AvailableSchedules';
+import { TUTORING_LIMITS, TUTORING_PLANS, UCAB_SUBJECTS, AVAILABLE_SCHEDULES, CONTACT_CONFIG, getWhatsappUrl } from '../data/tutoring';
 
 const CalendarPage: React.FC = () => {
   const [selectedPlan, setSelectedPlan] = useState('two-hours');
@@ -39,7 +40,7 @@ const CalendarPage: React.FC = () => {
     <>
       <Helmet>
         <title>Agendar Tutoría | CodeMentor UCAB</title>
-        <meta name="description" content="Agenda tu clase de programación o tutoría para la UCAB (Estructura de Datos, POO, Desarrollo). Cupos limitados." />
+        <meta name="description" content="Consulta los horarios disponibles y agenda tu clase de programación o tutoría para la UCAB (Estructura de Datos, POO, Desarrollo)." />
       </Helmet>
 
       <div className="pt-20">
@@ -49,25 +50,9 @@ const CalendarPage: React.FC = () => {
           centered
           background="light"
         >
-          {/* Banner de Cupos */}
+          {/* Horarios Disponibles */}
           <div className="max-w-4xl mx-auto mb-10">
-            <div className="bg-amber-50 dark:bg-amber-950/40 border border-amber-300 dark:border-amber-700/60 rounded-xl p-4 flex flex-col sm:flex-row items-center justify-between gap-4">
-              <div className="flex items-center gap-3 text-amber-900 dark:text-amber-200">
-                <AlertCircle className="w-5 h-5 text-amber-600 dark:text-amber-400 flex-shrink-0" />
-                <p className="text-sm font-semibold">
-                  Disponibilidad actual: solo {TUTORING_LIMITS.availableSpots} cupos activos para asegurar calidad académica.
-                </p>
-              </div>
-              <a
-                href={getWhatsappUrl('Hola! Quisiera agendar una tutoría UCAB')}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 whitespace-nowrap bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-semibold px-3.5 py-2 rounded-lg transition-colors"
-              >
-                <MessageCircle size={15} />
-                Agendar por WhatsApp
-              </a>
-            </div>
+            <AvailableSchedules />
           </div>
 
           <div className="max-w-5xl mx-auto">
@@ -216,6 +201,23 @@ const CalendarPage: React.FC = () => {
                             className="w-full text-xs px-3.5 py-2.5 border rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white focus:ring-2 focus:ring-blue-500 outline-none"
                           />
                         </div>
+                      </div>
+
+                      <div>
+                        <label className="block text-xs font-semibold text-gray-700 dark:text-gray-300 mb-1">
+                          Horario disponible de tu preferencia
+                        </label>
+                        <select
+                          name="horario_preferido"
+                          className="w-full text-xs px-3.5 py-2.5 border rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white focus:ring-2 focus:ring-blue-500 outline-none"
+                        >
+                          <option value="A convenir">A convenir / Cualquier franja disponible</option>
+                          {AVAILABLE_SCHEDULES.map((slot) => (
+                            <option key={slot.id} value={`${slot.day}: ${slot.timeRange} (${slot.duration})`}>
+                              {slot.day}: {slot.timeRange} ({slot.duration})
+                            </option>
+                          ))}
+                        </select>
                       </div>
 
                       <div>
